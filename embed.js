@@ -1,5 +1,5 @@
 let url =
-        "https://demo.microstrategy.com/MicroStrategyLibrary/app/EC70648611E7A2F962E90080EFD58751/EAF770F9CD46F277F7B36588C3425B94/K100--K92"; // https://{env-url}/{libraryName}/app/{projectId}/{dossierId}
+        "https://demo.microstrategy.com/MicroStrategyLibrary/app/B7CA92F04B9FAE8D941C3E9B7E0CD754/14CC30F611EAEC3D273F0080EFD5628A/K53--K46"; // https://{env-url}/{libraryName}/app/{projectId}/{dossierId}
       let dossier; // Variable to store the dossier created. Used by Event Handler do not remove!
       let config; // Variable to store the configuration settings for dossier.
       async function runCode() {
@@ -7,8 +7,8 @@ let url =
         config = {
           url: url,
           placeholder: document.getElementById("embedding-dossier-container"),
-          containerHeight: "600px",
-          containerWidth: "800px",
+          containerHeight: "400px",
+          containerWidth: "200px",
           customAuthenticationType:
             microstrategy.dossier.CustomAuthenticationType.AUTH_TOKEN,
           disableNotification: true,
@@ -38,7 +38,7 @@ let url =
           enableCustomAuthentication: false,
           enableResponsive: true,
           filterFeature: {
-            enabled: true,
+            enabled: false,
             edit: true,
             summary: true,
           },
@@ -47,20 +47,7 @@ let url =
             console.log("Implement log in to return promise of auth token");
           },
           navigationBar: {
-            enabled: true,
-            gotoLibrary: true,
-            title: true,
-            toc: true,
-            reset: true,
-            reprompt: true,
-            share: true,
-            comment: true,
-            notification: true,
-            filter: true,
-            options: true,
-            search: true,
-            bookmark: true,
-            edit: false,
+            enabled: false,
           },
           optionsFeature: {
             enabled: true,
@@ -97,6 +84,17 @@ let url =
         };
         // INSERT PROPERTIES BELOW HERE
 
+        /* Embed Single Visualization Start */
+        config.visualizationAppearances = [
+          {
+            visualizationKey: "K52", // Replace with visualization key in your dossier
+            size: "maximized",
+            resizeButtonVisible: false,
+          },
+        ];
+        
+        /* Embed Single Visualization End */
+
         // INSERT PROPERTIES ABOVE HERE
 
         // Embed the dossier with the configuration settings
@@ -108,6 +106,19 @@ let url =
 
         // INSERT METHODS BELOW HERE
 
+        /* Get Current Page Visualizations Start */
+        dossier
+          .getCurrentPageVisualizationList()
+          .then((list) => {
+            console.log("Current Page Visualization List:", list);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+        /* Get Current Page Visualizations End */
+
         // INSERT METHODS ABOVE HERE
       }
       runCode();
+
+      
