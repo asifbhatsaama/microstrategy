@@ -1,2 +1,0 @@
-# microstrategy
-MicroStrategy POC

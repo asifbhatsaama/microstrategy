@@ -31,7 +31,7 @@ async function runCode1() {
       isDocked: true,
     },
     dossierFeature: {
-      readonly: false,
+      readonly: true,
     },
     enableCollaboration: true,
     enableCustomAuthentication: false,
