@@ -1,5 +1,7 @@
-// let url = "https://demo.microstrategy.com/MicroStrategyLibrary/app/B7CA92F04B9FAE8D941C3E9B7E0CD754/58FD451E1541F23210E9698F84A71985/K149--K142";
-// let url = "https://mobiledossier.microstrategy.com/MicroStrategyLibrary/app/EC70648611E7A2F962E90080EFD58751/837B57D711E941BF000000806FA1298F/W1081--K46";
+// let baseurl = "https://mobiledossier.microstrategy.com/MicroStrategyLibrary/app"
+// let projid = localStorage.setItem ("projid");
+// let dossierid = localStorage.setItem ("dossierid");
+
 let url = "https://mobiledossier.microstrategy.com/MicroStrategyLibrary/app/EC70648611E7A2F962E90080EFD58751/21B5BAD411EA7812420A0080EF25E585/W253--K206";
 let dossier; // Variable to store the dossier created. Used by Event Handler do not remove!
 let config; // Variable to store the configuration settings for dossier.
@@ -203,7 +205,7 @@ $(".filterswitchhorizontally").on("click", function () {
 });
 
 // Function to render the dossier
-async function runCode() {
+async function runCode(url) {
     // For more details on configuration properties, see https://www2.microstrategy.com/producthelp/Current/EmbeddingSDK/Content/topics/dossier_properties.htm
     config = {
         url: url,
@@ -285,4 +287,10 @@ async function runCode() {
       }); */
 
 }
-runCode();
+
+
+
+function dosparam(){
+    let url = "https://mobiledossier.microstrategy.com/MicroStrategyLibrary/app"+ "/" + sessionStorage.getItem("projid") + "/" + sessionStorage.getItem("dossierid");
+    runCode(url);
+}
