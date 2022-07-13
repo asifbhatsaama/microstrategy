@@ -3,7 +3,7 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript"
-        src="https://demo.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
+        src="https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
     <link rel="stylesheet" href="./chosen.min.css">
     <link rel="stylesheet" href="./common.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
@@ -33,11 +33,11 @@
         </div>
     </div>
     <div class="tab-btn">
-        <button class="basic-button btn-link subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[0].getFirstPage())">First Page</button>
-        <button class="basic-button btn-link subtab" onclick="dossier.goToPrevPage();">Previous page</button>
+        <button class="basic-button btn-basic  subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[0].getFirstPage())">First Page</button>
+        <button class="basic-button btn-basic subtab" onclick="dossier.goToPrevPage();">Previous page</button>
         <div class="button-holder"></div>
-        <button class="basic-button btn-link subtab" onclick="dossier.goToNextPage();">Next Page</button>
-        <button class="basic-button btn-link subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[dossier.getChapterList().length - 1].getLastPage());">Last Page</button>
+        <button class="basic-button btn-basic subtab" onclick="dossier.goToNextPage();">Next Page</button>
+        <button class="basic-button btn-basic  subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[dossier.getChapterList().length - 1].getLastPage());">Last Page</button>
     </div>
     <div class="mainContainer">
         <!-- <div id="filterContainer" class="basic-container"> -->

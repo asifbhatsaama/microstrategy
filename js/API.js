@@ -14,6 +14,7 @@ async function login(baseURL,user,pass, loginMode) {
     return fetch(baseURL + '/api/auth/login', options)
     .then(function (response) {
         if (response.ok) {
+            console.log("Cookieee Info")
             console.log(response.headers.get('x-mstr-authToken'));
             return response.headers.get('x-mstr-authToken')
         } else {

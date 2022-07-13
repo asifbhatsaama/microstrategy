@@ -2,7 +2,7 @@
 // let projid = localStorage.setItem ("projid");
 // let dossierid = localStorage.setItem ("dossierid");
 
-let url = "https://mobiledossier.microstrategy.com/MicroStrategyLibrary/app/EC70648611E7A2F962E90080EFD58751/21B5BAD411EA7812420A0080EF25E585/W253--K206";
+let url = "";
 let dossier; // Variable to store the dossier created. Used by Event Handler do not remove!
 let config; // Variable to store the configuration settings for dossier.
 const attributeSelector = "attributeSelector"; // Variable to store string for attributeSelector filter type
@@ -234,6 +234,17 @@ async function runCode(url) {
     // Embed the dossier with the configuration settings
     try {
         dossier = await window.microstrategy.dossier.create(config);
+        dossier.getCurrentPagePanelStacks()
+        .then((currentPagePanelStacks) => {
+          console.log(
+            "Get Current Page Panel Stacks:",
+            currentPagePanelStacks
+          );
+          return currentPagePanelStacks;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     } catch (error) {
         console.error(error);
     }
@@ -265,9 +276,13 @@ async function runCode(url) {
     var toc = dossier.getTableContent();
 
     for (let j = 0; j <= toc.chapters.length; j++) {
-        $('.button-holder').append(`<button class="basic-button btn-link subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[` + j + `].getFirstPage())">` + toc.chapters[j].name +
+        $('.button-holder').append(`<button class="basic-button btn-basic subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[` + j + `].getFirstPage())">` + toc.chapters[j].name +
             `</button>`);
     }
+
+
+   
+  /*  Get Current Page Panel Stacks End */
 
 
     /*  Get Current Page Panel Stacks End */
@@ -291,6 +306,6 @@ async function runCode(url) {
 
 
 function dosparam(){
-    let url = "https://mobiledossier.microstrategy.com/MicroStrategyLibrary/app"+ "/" + sessionStorage.getItem("projid") + "/" + sessionStorage.getItem("dossierid");
+    let url = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/app"+ "/" + sessionStorage.getItem("projid") + "/" + sessionStorage.getItem("dossierid");
     runCode(url);
 }
