@@ -90,10 +90,6 @@
     border-radius: 10px;
 }
 
-.filterswitch-btn {
-    position: relative;
-    left: 28.5%;
-}
 
 .filterControlLinks {
     margin: 5px;
@@ -134,6 +130,7 @@
 .tab-btn{
     display: flex;
     justify-content: flex-end;
+    font-size: small;
 }
 
 /* .btn-link{
@@ -256,4 +253,20 @@ display: flex;
 .filterswitch-btn.hrz {
     position: relative;
     left: 35.5%;
+}
+
+
+h3{
+    position: absolute;left:5
+}
+
+.filterswitch-btn{
+
+    position: absolute;right:0
+}
+
+.btn-link {
+
+    text-decoration :none
+
 }
