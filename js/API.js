@@ -25,7 +25,6 @@ async function login(baseURL,user,pass, loginMode) {
 
 
  async function getSession(baseURL,token) {
-    console.log("Inside get session method", token);
     var options = {
         method: 'GET',
         credentials: 'include',

@@ -12,7 +12,7 @@ async function updateFilters() {
     console.log("The list of filters is:", filterList);
     let filterListContainer = $(".filterListContainer");
     let filterListRow = "";
-    if (filterList && filterList.length > 0) {
+    if (filterList && filterList.length >= 0) {
         for (filter of filterList) {
             if (filter && filter.filterKey) {
                 const filterValueElement = showFilterValues(filter);
@@ -35,6 +35,35 @@ async function updateFilters() {
                 no_results_text: "Oops, nothing found!",
                 width: "100%"
             });
+
+        }
+        for (filter of filterList) {
+            const filterName = filter.filterName;
+            for (item of filter.filterDetail.items) {
+                if (item.selected === true) {
+                    const filterValue = item.value;
+                    setDefaultFilter(filterName, filterValue);
+
+                }
+            }
+
+        }
+    }
+}
+
+function setDefaultFilter(selectedFilterName, selectedFilterValue) {
+    let filterListRow = $(".filterListRow select");
+    for (filter of filterListRow) {
+        const filterName = filter.getAttribute("name");
+        const filterKey = "#filter" + filter.getAttribute("key");
+        if (selectedFilterName === filterName) {
+            const options = filter.children;
+            for (opt of options) {
+                if (selectedFilterValue === opt.value) {
+                    opt.setAttribute('selected', "selected");
+                }
+            }
+            $(filterKey).trigger('chosen:updated');
         }
     }
 }
@@ -81,7 +110,7 @@ function applyFilter(type) {
             for (val of values) {
                 selections.push({ value: val });
             }
-            if (values.length > 0) {
+            if (values.length >= 0) {
                 let filterJson = {
                     filterInfo: {
                         key: key
@@ -91,6 +120,16 @@ function applyFilter(type) {
                 }
                 dossier.filterSelectMultiAttributes(filterJson);
             }
+            //    else if (values.length >= 0) {
+            //         let filterJson = {
+            //             filterInfo: {
+            //                 key: key
+            //             },
+            //             selections: selections,
+            //             holdSubmit: true
+            //         }
+            //         dossier.filterSelectMultiAttributes(filterJson);
+            //     }
         } else {
             let filterJson = {
                 filterInfo: {
@@ -104,6 +143,7 @@ function applyFilter(type) {
 
     }
     dossier.filterApplyAll();
+    // updateFilters();
 }
 
 // Function to set all attribute filter checkboxes to be true(checked) or false(unchecked)
@@ -170,6 +210,7 @@ function eventGraphicsSelectedFunction(e) {
             for (opt of options) {
                 if (selectedFilterValue === opt.value) {
                     opt.setAttribute('selected', "selected");
+
                 } else {
                     opt.removeAttribute("selected");
                 }
@@ -235,16 +276,16 @@ async function runCode(url) {
     try {
         dossier = await window.microstrategy.dossier.create(config);
         dossier.getCurrentPagePanelStacks()
-        .then((currentPagePanelStacks) => {
-          console.log(
-            "Get Current Page Panel Stacks:",
-            currentPagePanelStacks
-          );
-          return currentPagePanelStacks;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+            .then((currentPagePanelStacks) => {
+                console.log(
+                    "Get Current Page Panel Stacks:",
+                    currentPagePanelStacks
+                );
+                return currentPagePanelStacks;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     } catch (error) {
         console.error(error);
     }
@@ -273,39 +314,33 @@ async function runCode(url) {
         eventGraphicsSelectedFunction
     );
 
+
+    /* On Filter Updated Event Start*/
+    function eventFilterUpdatedFunction(e) {
+        //  console.log(e);
+        // Add any functionality for event needed here
+        console.log("Filter Updated Event");
+        updateFilters();
+    }
+    dossier.registerEventHandler(
+        microstrategy.dossier.EventType.ON_FILTER_UPDATED,
+        eventFilterUpdatedFunction
+    );
+
+    /* On Filter Updated Event End */
+
     var toc = dossier.getTableContent();
 
-    for (let j = 0; j <= toc.chapters.length; j++) {
+    for (let j = 0; j < toc.chapters.length; j++) {
         $('.button-holder').append(`<button class="basic-button btn-basic subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[` + j + `].getFirstPage())">` + toc.chapters[j].name +
             `</button>`);
     }
-
-
-   
-  /*  Get Current Page Panel Stacks End */
-
-
-    /*  Get Current Page Panel Stacks End */
-
-    /* Apply a Metric Qualify by Value Filter Start */
-    // This code snippet needs to be placed within on Page Loaded Event handler to work properly.
-    /*  dossier.filterSetMetricQualByValue({
-          filterInfo: {
-              key: "W282" // "W63", // Replace with the key of the filter that is being edited.
-          },
-          exp: {
-              operator: "between",
-              firstValue: 500000,
-              lastValue: 600000,
-          },
-          holdSubmit: false,
-      }); */
 
 }
 
 
 
-function dosparam(){
-    let url = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/app"+ "/" + sessionStorage.getItem("projid") + "/" + sessionStorage.getItem("dossierid");
+function dosparam() {
+    let url = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/app" + "/" + sessionStorage.getItem("projid") + "/" + sessionStorage.getItem("dossierid");
     runCode(url);
 }

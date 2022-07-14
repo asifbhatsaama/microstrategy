@@ -1,14 +1,11 @@
  function startLibrary() {
     const token = sessionStorage.getItem("token");
     const baseURL = sessionStorage.getItem("baseURL");
-    debugger;
     getSession(baseURL, token)
     .then((session) => {
 
         extendSession(baseURL,token)
         getLibrary(baseURL, token).then((library)=> {
-
-            console.log(library)
             var table = document.getElementById("dossierTable");
             for (i = 0; i < library.length; i++) {
                 var row = table.insertRow(i + 1);

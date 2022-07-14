@@ -16,9 +16,9 @@
     <div class="outerbox">
         <div id="loginbox" class="form-group">
             <label for="username">Username</label>
-            <input class="form-control" type="text" id="username" value="guest">
+            <input class="form-control" type="text" id="username" placeholder="Username">
             <label for="password">Password</label>
-            <input class="form-control" type="password" id="password">         
+            <input class="form-control" type="password" id="password" placeholder="Password">         
             <button  type="button" class="btn btn-primary" onclick="main();">Login</button>
         </div>
     </div>
@@ -33,14 +33,11 @@
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         const loginMode = 1;
-        console.log(username,password);
 
         login(baseURL, username, password, loginMode)
         .then((token)=> {
-            console.log('Hiiiiiii');
             sessionStorage.setItem("baseURL", baseURL);
             sessionStorage.setItem("token", token);
-            console.log(baseURL,token);
             location.href = "dossiers.html";
         
         }).catch(function (error) {
