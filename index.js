@@ -120,16 +120,7 @@ function applyFilter(type) {
                 }
                 dossier.filterSelectMultiAttributes(filterJson);
             }
-            //    else if (values.length >= 0) {
-            //         let filterJson = {
-            //             filterInfo: {
-            //                 key: key
-            //             },
-            //             selections: selections,
-            //             holdSubmit: true
-            //         }
-            //         dossier.filterSelectMultiAttributes(filterJson);
-            //     }
+
         } else {
             let filterJson = {
                 filterInfo: {
@@ -220,7 +211,7 @@ function eventGraphicsSelectedFunction(e) {
     }
 }
 
-$(".filterswitchvertically").on("click", function () {
+$(".filterswitchvertically").on("click", function() {
     $(".mainContainer").removeClass("mainContainer").addClass("mainContainerhrz");
     $(".filterContainer").removeClass("filterContainer").addClass("filterContainerhrz");
     $(".filterHeader").removeClass(".filterHeader").addClass(".filterHeaderhrz");
@@ -234,7 +225,7 @@ $(".filterswitchvertically").on("click", function () {
 });
 
 
-$(".filterswitchhorizontally").on("click", function () {
+$(".filterswitchhorizontally").on("click", function() {
     $(".mainContainerhrz").removeClass("mainContainerhrz").addClass("mainContainer");
     $(".filterContainerhrz").removeClass("filterContainerhrz").addClass("filterContainer");
     $(".filterHeaderhrz").removeClass(".filterHeaderhrz").addClass(".filterHeader");
@@ -251,6 +242,8 @@ async function runCode(url) {
     config = {
         url: url,
         placeholder: document.getElementById("embedding-dossier-container"),
+        containerHeight: "700px",
+        containerWidth: "600px",
         navigationBar: {
             enabled: true,
             gotoLibrary: true,
@@ -289,11 +282,16 @@ async function runCode(url) {
     } catch (error) {
         console.error(error);
     }
+
+
+
     // INSERT METHODS BELOW HERE
     updateFilters();
+
     function eventPageSwitchedFunction(e) {
         /* Add any functionality for event needed here */
         updateFilters();
+        getPanels();
 
     }
 
@@ -327,14 +325,20 @@ async function runCode(url) {
         eventFilterUpdatedFunction
     );
 
-    /* On Filter Updated Event End */
+    getPanels();
 
+    // Get all pages
     var toc = dossier.getTableContent();
+    var listOfChapters = dossier.getChapterList();
+    for (let i = 0; i < listOfChapters.length; i++) {
+        for (let j = 0; j < listOfChapters[i].children.length; j++) {
+            node = "dossier.navigateToPage(dossier.getPageByNodeKey(" + `'` + listOfChapters[i].children[j].nodeKey + `'` + "))"
+            $('.button-holder').append(`<button class="basic-button btn-basic subtab" onclick="` + node + `">` + listOfChapters[i].children[j].name +
+                `</button>`);
 
-    for (let j = 0; j < toc.chapters.length; j++) {
-        $('.button-holder').append(`<button class="basic-button btn-basic subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[` + j + `].getFirstPage())">` + toc.chapters[j].name +
-            `</button>`);
+        }
     }
+
 
 }
 
@@ -343,4 +347,106 @@ async function runCode(url) {
 function dosparam() {
     let url = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/app" + "/" + sessionStorage.getItem("projid") + "/" + sessionStorage.getItem("dossierid");
     runCode(url);
+}
+
+
+function authoring() {
+
+    /* Enable Authoring Mode Configuration Start */
+    // The following config properties must be removed to allow dossier authoring
+    delete config["instance"];
+    delete config["filters"];
+    delete config["visualizationAppearances"];
+    delete config["visualizationSelectedElements"];
+
+    // Set to authoring mode
+    config.dossierRenderingMode = "authoring"; // Can be "authoring" or "consumption"
+    config.navigationBar.edit = true; // Show the edit icon in navigation bar
+    /* Enable Authoring Mode Configuration End */
+
+    /* Customize Authoring Mode Properties Start */
+    config.authoring = {
+        menubar: {
+            library: {
+                visible: true, // Show library icon
+            },
+        },
+        toolbar: {
+            // For full list of options see documentation
+            addData: { visible: false }, // Hide add data
+        },
+        panelVisibility: {
+            contents: true,
+            datasets: false,
+            editor: false,
+            filter: false,
+            format: false,
+            layers: false,
+        },
+    };
+    /* Customize Authoring Mode Properties End */
+
+    // INSERT PROPERTIES ABOVE HERE
+
+    // Embed the dossier with the configuration settings
+    // INSERT METHODS BELOW HERE
+
+    /* Switch to Authoring Mode Start */
+    dossier
+        .switchToMode("authoring")
+        .then((e) => console.log(e))
+        .catch((error) => console.error(error));
+    /* Switch to Authoring Mode End */
+
+}
+
+
+
+// function getPanels(){
+
+//     dossier.getCurrentPagePanelStacks().then((currentPagePanelStacks) => { 
+//         let row="";
+//         for (let i=0;i<currentPagePanelStacks.length;i++){
+//             for (let j=0;j<currentPagePanelStacks[i].panels.length;j++){
+//                 console.log(currentPagePanelStacks[i].panels[j].name);
+//                 row+=`<option value="${currentPagePanelStacks[i].panels[j].key}" id = "${currentPagePanelStacks[i].panels[j].key}" class="${currentPagePanelStacks[i].panels[j].name}">${currentPagePanelStacks[i].panels[j].name}</option>`;
+//             }
+//         }
+//         document.querySelector(".panel").innerHTML= row;
+//         return currentPagePanelStacks;
+
+//       })
+// }
+
+// var sel = $('<select>').appendTo('body');
+// $(arr).each(function() {
+//     sel.append($("<option>").attr('value', this.val).text(this.text));
+// });
+
+function getPanels() {
+
+    dossier.getCurrentPagePanelStacks().then((currentPagePanelStacks) => {
+        var row = "";
+        for (var i = 0; i < currentPagePanelStacks.length; i++) {
+            for (var j = 0; j < currentPagePanelStacks[i].panels.length; j++) {
+                row += `<option value="${currentPagePanelStacks[i].panels[j].key}" id = "${currentPagePanelStacks[i].panels[j].key}" class="${currentPagePanelStacks[i].panels[j].name}">${currentPagePanelStacks[i].panels[j].name}</option>`;
+            }
+        }
+        document.querySelector(".panel").innerHTML = row;
+        if (row.length > 0) {
+            console.log("Wow, panel found!");
+            $(".panel").show();
+        } else {
+            console.log("Oops, panel not found!");
+            $(".panel").hide();
+        }
+        return currentPagePanelStacks;
+    })
+}
+
+
+function selectChanged(tag) {
+    dossier.switchPanel(document.querySelector('option:checked').value).then((switchPanel) => {
+        console.log("Panel switched to ", switchPanel);
+    })
 }
