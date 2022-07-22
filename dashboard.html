@@ -26,10 +26,13 @@
 
 <body onload="dosparam();">
     <div class="headerContainer">
-        <h3>Micro Strategy Demo</h3>
+        <h3>MicroStrategy POC</h3>
         <div class="filterswitch-btn">
             <button class="btn btn-primary filterswitchvertically">Vertical</button>
             <button class="btn btn-primary filterswitchhorizontally">Horizontal</button>
+            <button class="btn btn-primary filterswitchhorizontally" onclick="authoring()">Edit</button>
+            <select class = "panel" style="margin-right: 10px;" onchange="selectChanged(this);"></select>
+            <div id="panelStacksPanel"></div>
         </div>
     </div>
     <div class="tab-btn">
