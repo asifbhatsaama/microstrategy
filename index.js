@@ -257,7 +257,7 @@ async function runCode(url) {
             filter: true,
             options: true,
             search: true,
-            bookmark: true,
+            bookmark: true
         },
         enableResponsive: true,
     };
@@ -335,14 +335,9 @@ async function runCode(url) {
             node = "dossier.navigateToPage(dossier.getPageByNodeKey(" + `'` + listOfChapters[i].children[j].nodeKey + `'` + "))"
             $('.button-holder').append(`<button class="basic-button btn-basic subtab" onclick="` + node + `">` + listOfChapters[i].children[j].name +
                 `</button>`);
-
         }
     }
-
-
 }
-
-
 
 function dosparam() {
     let url = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/app" + "/" + sessionStorage.getItem("projid") + "/" + sessionStorage.getItem("dossierid");
@@ -368,7 +363,7 @@ function authoring() {
     config.authoring = {
         menubar: {
             library: {
-                visible: true, // Show library icon
+                visible: false, // Show library icon
             },
         },
         toolbar: {
@@ -377,19 +372,16 @@ function authoring() {
         },
         panelVisibility: {
             contents: true,
-            datasets: false,
-            editor: false,
-            filter: false,
-            format: false,
-            layers: false,
+            datasets: true,
+            editor: true,
+            filter: true,
+            format: true,
+            layers: true,
         },
     };
     /* Customize Authoring Mode Properties End */
 
-    // INSERT PROPERTIES ABOVE HERE
-
     // Embed the dossier with the configuration settings
-    // INSERT METHODS BELOW HERE
 
     /* Switch to Authoring Mode Start */
     dossier
@@ -398,30 +390,12 @@ function authoring() {
         .catch((error) => console.error(error));
     /* Switch to Authoring Mode End */
 
+    /* Create a dossier by using authoring configurations Start */
+
+    dossier = window.microstrategy.dossier.create(config);
+
+    /* Create a dossier by using authoring configurations End */
 }
-
-
-
-// function getPanels(){
-
-//     dossier.getCurrentPagePanelStacks().then((currentPagePanelStacks) => { 
-//         let row="";
-//         for (let i=0;i<currentPagePanelStacks.length;i++){
-//             for (let j=0;j<currentPagePanelStacks[i].panels.length;j++){
-//                 console.log(currentPagePanelStacks[i].panels[j].name);
-//                 row+=`<option value="${currentPagePanelStacks[i].panels[j].key}" id = "${currentPagePanelStacks[i].panels[j].key}" class="${currentPagePanelStacks[i].panels[j].name}">${currentPagePanelStacks[i].panels[j].name}</option>`;
-//             }
-//         }
-//         document.querySelector(".panel").innerHTML= row;
-//         return currentPagePanelStacks;
-
-//       })
-// }
-
-// var sel = $('<select>').appendTo('body');
-// $(arr).each(function() {
-//     sel.append($("<option>").attr('value', this.val).text(this.text));
-// });
 
 function getPanels() {
 
