@@ -3,10 +3,10 @@
 .headerContainer {
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     height: 50px;
     width: 100%;
-    background-color: blue; /*#25a186*/
+    background-color: darkblue;
     color: white;
 }
 
@@ -15,7 +15,6 @@
     width: 100%;
     flex-direction: column;
 }
-
 
 .filterContainer {
     width: 100%;
@@ -42,13 +41,11 @@
     width: 100%;
 }
 
-
 .btn-primary {
     margin: 10px;
     padding: 5px 10px;
     width: 150px;
 }
-
 
 .filterControlList {
     display: flex;
@@ -56,7 +53,6 @@
     justify-content: center;
     flex-direction: column;
 }
-
 
 .filterListRow {
     padding: 10px 10px;
@@ -90,24 +86,38 @@
     border-radius: 10px;
 }
 
-.filterswitch-btn {
-    position: relative;
-    left: 28.5%;
-}
-
 .filterControlLinks {
     margin: 5px;
 }
 
 .filterlinks {
-    margin-left: 40px;
+    margin-left: 25px;
     margin-top: -25px;
 }
 
 .btn {
-    width: 150px;
-    height: 50px;
-    margin-top: 15px;
+    width: 98px;
+    background-color: black;
+    color: white;
+}
+
+.panel {
+    height: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: darkblue;
+    color: #fff;
+    border-radius: 0.25rem;
+    border-color: #0d6efd;
+}
+
+.vizlist {
+    height: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: darkblue;
+    color: #fff;
+    border-radius: 0.25rem;
+    border-color: #0d6efd;
+    margin-top: 10px;
 }
 
 .filterControlLink {
@@ -122,7 +132,7 @@
     margin-top: 20px;
 }
 
-.subtab{
+.subtab {
     margin: 2.5px;
     height: 50px;
     min-width: fit-content;
@@ -131,18 +141,17 @@
     /* background-color: aqua; */
 }
 
-.tab-btn{
+.tab-btn {
     display: flex;
     justify-content: flex-end;
+    font-size: small;
 }
 
-/* .btn-link{
-    font-weight: bold;
-} */
 
 /* Show Filters Vertically */
 
-.headerContainer {
+
+/* .headerContainer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -150,7 +159,7 @@
     width: 100%;
     background-color: blue;
     color: white;
-}
+} */
 
 .mainContainerhrz {
     display: flex;
@@ -218,7 +227,6 @@
 .rowFilterControlhrz {
     display: flex;
     gap: 5px;
-
 }
 
 .selectandclearbuttonshrz {
@@ -235,12 +243,11 @@
 .filterControlLinkshrz {
     /* margin: 10px;
     padding: 10px; */
-display: flex;
+    display: flex;
     margin-top: -5px;
     margin-left: 10px;
     /* margin-left: -20px; */
     margin: 5px;
-
 }
 
 .filterControlhrz {
@@ -256,4 +263,18 @@ display: flex;
 .filterswitch-btn.hrz {
     position: relative;
     left: 35.5%;
+}
+
+h3 {
+    position: absolute;
+    left: 5
+}
+
+.filterswitch-btn {
+    position: absolute;
+    right: 0
+}
+
+.btn-link {
+    text-decoration: none
 }

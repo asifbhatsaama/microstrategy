@@ -14,6 +14,8 @@ async function login(baseURL,user,pass, loginMode) {
     return fetch(baseURL + '/api/auth/login', options)
     .then(function (response) {
         if (response.ok) {
+            console.log("Cookieee Info")
+            console.log(response.headers.get('x-mstr-authToken'));
             return response.headers.get('x-mstr-authToken')
         } else {
             throw(new Error("Login Error"))
@@ -37,6 +39,7 @@ async function login(baseURL,user,pass, loginMode) {
         if (response.ok) {
             return response.json()
         } else {
+            console.log(response.json());
             throw(new Error("Get Session Error"));
         }
     })
@@ -85,22 +88,95 @@ async function getLibrary(baseURL,token) {
     })    
 }
 
-// async function main() {
-//     const baseURL = "https://demo.microstrategy.com/MicroStrategyLibrary";
-//     const username = document.getElementById("username").value;
-//     const password = document.getElementById("password").value;
-//     const loginMode = 8;
 
-//     login(baseURL, username, password, loginMode)
-//     .then((token)=> {
-//         sessionStorage.setItem("baseURL", baseURL);
-//         sessionStorage.setItem("token", token);
-//         location.href = "dossiers.html";
-    
-//     }).catch(function (error) {
-//         console.log(error);
-//     })
-    
-// }
+async function getContentGroups(baseURL,token) {
+    var options = {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json',
+                  'x-mstr-authtoken': token
+                 }
+    }
 
-// main();
+    return fetch(baseURL + '/api/contentBundles', options)
+    .then(function (response) {
+        if (response.ok) {
+            return response.json()
+        } else {
+            throw(new Error("Get Library Error"));
+        }
+    })    
+}
+
+
+async function getProjects(baseURL,token) {
+    var options = {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json',
+                  'x-mstr-authtoken': token
+                 }
+    }
+
+    return fetch(baseURL + '/api/monitors/projects', options)
+    .then(function (response) {
+        if (response.ok) {
+            return response.json()
+        } else {
+            throw(new Error("Get Library Error"));
+        }
+    })    
+}
+
+
+
+
+async function getContentGroupsChild(baseURL,token,groupid,projectid) {
+    var options = {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json',
+                  'x-mstr-authtoken': token
+                 }
+    }
+
+    return fetch(baseURL + '/api/contentBundles/'+ groupid+ '/contents?projectId='+ projectid, options)
+    .then(function (response) {
+        if (response.ok) {
+            return response.json()
+        } else {
+            throw(new Error("Get Library Error"));
+        }
+    })    
+}
+
+
+async function getAuthToken(baseUrl) {
+    const options = {
+      method: "GET",
+      credentials: "include",
+      mode: "cors",
+      headers: { "content-type": "application/json" },
+    };
+    return await fetch(
+        baseUrl + "/api/auth/token",
+      options
+    )
+      .then((response) => {
+        if (response.ok) 
+        {
+            console.log("AUTH TOKEN",response.headers.get("x-mstr-authtoken"))
+            return response.headers.get("x-mstr-authtoken");
+        }
+        else {
+            response.json().then((json) => console.log(json));
+        }
+      })
+      .catch((error) =>
+        console.error("Failed to retrieve authToken with error:", error)
+      );
+  }
+

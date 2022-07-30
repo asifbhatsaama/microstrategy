@@ -2,77 +2,79 @@
 
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript"
-        src="https://demo.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
+    <script type="text/javascript" src="https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
     <link rel="stylesheet" href="./chosen.min.css">
     <link rel="stylesheet" href="./common.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-        <style>
-            .btn-link{
-                font-weight: bold;
-            }
-        </style>
+    <style>
+        .btn-link {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body onload="dosparam();">
     <div class="headerContainer">
-        <h1>Micro Strategy Demo</h1>
+        <div style="flex-direction: row;display: flex;justify-content: flex-start;">
+        <h5 style="margin-top: 18px;margin-right: 10px;">Widget List </h5>
+        <select class="vizList" style="margin-right: 10px; vertical-align: inherit;"id="vizList"></select>
+        <button class="btn btn-primary filterswitchhorizontally" onclick="resizeWidget('maximized')" style="background-color:darkblue; vertical-align: inherit;width: 50px;" ><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
+        <button class="btn btn-primary filterswitchhorizontally" onclick="resizeWidget('normal')" style="background-color:darkblue; vertical-align: inherit;width: 50px;" ><i class="fa fa-minus-square-o" aria-hidden="true"></i>
+        </button>
+        <button class="btn btn-primary filterswitchhorizontally" onclick="resizeWidget('maximized')" style="background-color:darkblue; vertical-align: inherit;width: 50px;" >PDF</button>
+        <button class="btn btn-primary filterswitchhorizontally" onclick="resizeWidget('maximized')" style="background-color:darkblue; vertical-align: inherit;width: 50px;" >Excel</button>
+        <h3 style="margin-left: 45%;text-align: center;margin-top: 10px;">MicroStrategy POC</h3>
+    </div>
+        
         <div class="filterswitch-btn">
-            <button class="btn btn-primary filterswitchvertically">Vertical</button>
-            <button class="btn btn-primary filterswitchhorizontally">Horizontal</button>
+            <!-- <button class="btn btn-primary filterswitchvertically" style="background-color:darkblue; vertical-align: inherit;">Vertical</button>
+            <button class="btn btn-primary filterswitchhorizontally" style="background-color:darkblue; vertical-align: inherit;">Horizontal</button> -->
+            <button class="btn btn-primary filterswitchhorizontally" style="background-color:darkblue; vertical-align: inherit;width: 106px;" onclick="fullscreen()">Full Screen</button>
+            <button class="btn btn-primary filterswitchhorizontally" onclick="authoring()" style="background-color:darkblue; vertical-align: inherit;" >Edit</button>
+            <select class="panel" style="margin-right: 10px; vertical-align: inherit;" onchange="selectChanged(this);"></select>
+            <div id="panelStacksPanel"></div>
         </div>
     </div>
     <div class="tab-btn">
-        <button class="basic-button btn-link subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[0].getFirstPage())">First Page</button>
-        <button class="basic-button btn-link subtab" onclick="dossier.goToPrevPage();">Previous page</button>
+        <button class="basic-button btn-basic  subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[0].getFirstPage())">First Page</button>
+        <button class="basic-button btn-basic subtab" onclick="dossier.goToNextPage();">Next Page</button>
         <div class="button-holder"></div>
-        <button class="basic-button btn-link subtab" onclick="dossier.goToNextPage();">Next Page</button>
-        <button class="basic-button btn-link subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[dossier.getChapterList().length - 1].getLastPage());">Last Page</button>
+        <button class="basic-button btn-basic subtab" onclick="dossier.goToPrevPage();">Previous page</button>
+        <button class="basic-button btn-basic  subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[dossier.getChapterList().length - 1].getLastPage());">Last Page</button>
     </div>
-    <div class="mainContainer">
-        <!-- <div id="filterContainer" class="basic-container"> -->
 
-        <!-- <div class="button-holder"></div> -->
+
+    <div class="mainContainer">
 
         <div id="filterContainer" class="filterContainer basic-container">
 
-            <!-- <div class="filterHeader">Filter Section</div> -->
             <div class="filterSection">
                 <div class="filterListContainer example-container"></div>
             </div>
             <div class="filterControlSection">
                 <div class="filterControl">
 
-                    <!-- <input type="button" value="Apply" class="basic-button"
-                            onclick="applyFilter(attributeSelector)" /> -->
 
-                    <button type="button" class="btn btn-primary"
-                        onclick="applyFilter(attributeSelector)">Apply</button>
+                    <button type="button" class="btn btn-primary" onclick="applyFilter(attributeSelector)">Apply</button>
 
                     <div class="filterlinks">
-                        <a href="#" class="filterControlLinks" id="attributeSelectorValuesSelectAllAndSubmit"
-                            onclick="selectAllAndSubmit()"><i class="fa-solid fa-check fa-2x"></i></a>
-                        <a href="#" class="filterControlLinks" id="attributeSelectorValuesDeselectAllAndSubmit"
-                            onclick="deselectAllAndSubmit()"><i class="fa fa-remove fa-2x clearall-btn"></i></a>
+                        <a href="#" class="filterControlLinks" id="attributeSelectorValuesSelectAllAndSubmit" onclick="selectAllAndSubmit()"><i class="fa-solid fa-check fa-2x"></i></a>
+                        <a href="#" class="filterControlLinks" id="attributeSelectorValuesDeselectAllAndSubmit" onclick="deselectAllAndSubmit()"><i class="fa fa-remove fa-2x clearall-btn"></i></a>
                     </div>
 
                 </div>
             </div>
         </div>
-        <!-- </div> -->
-        <!-- <iframe src="" frameborder="0"></iframe> -->
+
+
         <div id="embedding-dossier-container"></div>
-        
+
     </div>
     <script src="./chosen.jquery.min.js"></script>
     <script src="./index.js"></script>
