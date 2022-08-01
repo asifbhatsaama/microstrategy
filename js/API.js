@@ -180,3 +180,40 @@ async function getAuthToken(baseUrl) {
       );
   }
 
+async function createUser(token,raw,baseURL){
+    let options = {
+        method: "POST",
+        credentials: "include",
+        mode: "cors",
+        headers: {
+          "content-type": "application/json",
+          "x-mstr-authtoken": token,
+        },
+        body: raw,
+        redirect: 'follow'
+      };
+
+     return await fetch(baseURL+ "/api/users", options)
+    .then(response => response.text())
+    .then(result => console.log("UserSync Result :", result))
+    .catch(error => console.log("UserSync Failed :", error));
+}
+
+
+async function getUsersMSTR(token,baseURL){
+
+      var options = {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json',
+                  'x-mstr-authtoken': token
+                 }
+    }
+
+    await fetch(baseURL+ "/api/users", options)
+    .then(response => response.text())
+    .then(result => {return result})
+    .catch(error => console.log('error', error));
+
+}

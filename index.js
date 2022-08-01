@@ -481,11 +481,11 @@ function fullscreen() {
 
 
 //  PDF & Excel Export
-function exportPDFExcel(){
+async function exportPDFExcel(type){
 
     const pdfExportBody = JSON.stringify({
         includeOverview: true,
-        includeDetailedPages: false,
+        includeDetailedPages: true,  // All or Single pages
         includeHeader: true,
         includeFooter: true,
         includeToc: false,
@@ -505,11 +505,136 @@ function exportPDFExcel(){
 
       const excelExportBody = JSON.stringify({
         sliceId: 0,
-        pageOption: "ALL",
+        pageOption: "ALL", // All pages or current page
       });
 
       const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary";
+      const dossierId = sessionStorage.getItem("dossierid");
+      const token = await getAuthToken (baseURL);
 
-      const token = getAuthToken (baseURL);
+
+      let instanceId = await dossier.getDossierInstanceId().then((id) => id)
+      .catch((error) => {console.error(error); return null;});
+
+      console.log("Dossier Instance ID :",instanceId)
+
+      const exportBody = type === "pdf" ? pdfExportBody : excelExportBody;
+
+
+      let options = {
+        method: "POST",
+        credentials: "include",
+        mode: "cors",
+        headers: {
+          "content-type": "application/json",
+          "x-mstr-authtoken": token,
+          "x-mstr-projectid": sessionStorage.getItem("projid"),
+        },
+        body: exportBody,
+      };
+
+      console.log("EXPORT STARTED");
+        await fetch(baseURL +"/api/documents/" + dossierId +"/instances/" +instanceId +"/" + type, options)
+        .then((response) => {
+            console.log("Yay!! Export Completed");
+            if (type === "pdf") {
+              response.json().then((responseJson) => {
+
+                const byteCharacters = atob(responseJson.data);
+                console.log("byteCharacters",byteCharacters);
+
+                const byteNumbers = [];
+                for (var i = 0; i < byteCharacters.length; i++) {
+                  byteNumbers.push(byteCharacters.charCodeAt(i));
+                }
+                console.log("byteNumbers",byteNumbers)
+
+                const byteArray = new Uint8Array(byteNumbers);
+                console.log("byteArray",byteArray)
+
+                const file = new Blob([byteArray], {
+                  type: "application/pdf;base64",
+                });
+                console.log("file",file);
+
+                const link = document.createElement("a");
+                const url = URL.createObjectURL(file);
+
+                link.href = url;
+
+                link.download = "PDF EXport File";
+
+                link.click();
+              });
+            } else {
+              response.blob().then((blob) => {
+                const link = document.createElement("a");
+                const url = URL.createObjectURL(blob);
+                link.href = url;
+                link.download = "excelExportFile.xlsx";
+                link.click();
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Exporting has failed with error:", error);
+          });
+
+}
+
+
+async function userSync(){
+
+    const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary";
+    const token = await getAuthToken (baseURL);
+
+    var authUsers = [{
+        "fullName": "Saama UserSync",
+        "username": "UserSync",
+        "description": "User Sync Test",
+        "password": ""
+      },
+
+      {
+        "fullName": "Saama1 UserSync1",
+        "username": "UserSync1",
+        "description": "User1 Sync1 Test1",
+        "password": ""
+      }
+    ]
+   
+   
+    for (let i=0;i<authUsers.length;i++){
+
+        const raw = JSON.stringify(authUsers[i]);
+        createUser(token,raw,baseURL);
+        
+    }
+
+
+    var users = "";
+
+    var options = {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json',
+                'x-mstr-authtoken': token
+                }
+    }
+
+    await fetch(baseURL+ "/api/users", options)
+    .then(response => response.text())
+    .then(result => 
+         {
+            users = result;
+            
+         }
+        )
+    .catch(error => console.log('error', error));
+
+    users = JSON.parse(users);
+
+    console.log("MSTR User List - ",users);
 
 }

@@ -27,8 +27,8 @@
         <button class="btn btn-primary filterswitchhorizontally" onclick="resizeWidget('maximized')" style="background-color:darkblue; vertical-align: inherit;width: 50px;" ><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
         <button class="btn btn-primary filterswitchhorizontally" onclick="resizeWidget('normal')" style="background-color:darkblue; vertical-align: inherit;width: 50px;" ><i class="fa fa-minus-square-o" aria-hidden="true"></i>
         </button>
-        <button class="btn btn-primary filterswitchhorizontally" onclick="resizeWidget('maximized')" style="background-color:darkblue; vertical-align: inherit;width: 50px;" >PDF</button>
-        <button class="btn btn-primary filterswitchhorizontally" onclick="resizeWidget('maximized')" style="background-color:darkblue; vertical-align: inherit;width: 50px;" >Excel</button>
+        <button class="btn btn-primary filterswitchhorizontally" onclick="exportPDFExcel('pdf')" style="background-color:darkblue; vertical-align: inherit;width: 50px;" >PDF</button>
+        <button class="btn btn-primary filterswitchhorizontally" onclick="exportPDFExcel('excel')" style="background-color:darkblue; vertical-align: inherit;width: 60px;" >Excel</button>
         <h3 style="margin-left: 45%;text-align: center;margin-top: 10px;">MicroStrategy POC</h3>
     </div>
         
@@ -37,6 +37,7 @@
             <button class="btn btn-primary filterswitchhorizontally" style="background-color:darkblue; vertical-align: inherit;">Horizontal</button> -->
             <button class="btn btn-primary filterswitchhorizontally" style="background-color:darkblue; vertical-align: inherit;width: 106px;" onclick="fullscreen()">Full Screen</button>
             <button class="btn btn-primary filterswitchhorizontally" onclick="authoring()" style="background-color:darkblue; vertical-align: inherit;" >Edit</button>
+            <button class="btn btn-primary filterswitchhorizontally" onclick="userSync()" style="background-color:darkblue; vertical-align: inherit;" >UserSync</button>
             <select class="panel" style="margin-right: 10px; vertical-align: inherit;" onchange="selectChanged(this);"></select>
             <div id="panelStacksPanel"></div>
         </div>
@@ -78,6 +79,7 @@
     </div>
     <script src="./chosen.jquery.min.js"></script>
     <script src="./index.js"></script>
+    <script src="./js/API.js"></script>
 </body>
 
 </html>
