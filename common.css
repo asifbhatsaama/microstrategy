@@ -8,6 +8,7 @@
     width: 100%;
     background-color: darkblue;
     color: white;
+    justify-content: space-between;
 }
 
 .mainContainer {
@@ -111,6 +112,16 @@
 }
 
 .vizlist {
+    height: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: darkblue;
+    color: #fff;
+    border-radius: 0.25rem;
+    border-color: #0d6efd;
+    margin-top: 10px;
+}
+
+.projectList {
     height: 40px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: darkblue;

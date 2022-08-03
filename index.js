@@ -99,7 +99,6 @@ function applyFilter(type) {
     for (filter of filterListRow) {
         const key = filter.getAttribute("key");
         const values = $("#filter" + key).val();
-        console.log("Values -->>>",values)
         const multiselect = filter.hasAttribute("multiple");
         if (multiselect) {
             let selections = [];
@@ -130,7 +129,7 @@ function applyFilter(type) {
 
     }
     dossier.filterApplyAll();
-    // updateFilters();
+    updateFilters();
 }
 
 // Function to set all attribute filter checkboxes to be true(checked) or false(unchecked)
@@ -299,9 +298,11 @@ async function runCode(url) {
 
 
     updateWidgetList();
+
     function eventPageSwitchedFunction(e) {
-      /* Add any functionality for event needed here */
-      updateWidgetList();
+        /* Add any functionality for event needed here */
+        updateWidgetList();
+        // getPanels();
     }
 
     // Update filters when page switches
@@ -335,6 +336,7 @@ async function runCode(url) {
     );
 
     getPanels();
+    populateProjects();
 
     // Get all pages
     var toc = dossier.getTableContent();
@@ -355,31 +357,30 @@ function dosparam() {
 
 
 function authoring() {
-
     delete config["instance"];
     delete config["filters"];
     delete config["visualizationAppearances"];
     delete config["visualizationSelectedElements"];
 
-    config.dossierRenderingMode = "authoring"; 
+    config.dossierRenderingMode = "authoring";
 
     config.authoring = {
         menubar: {
             library: {
-                visible: true, 
+                visible: true,
             },
         },
 
-    
+
         toolbar: {
-            
-            addData: { visible: false }, 
-            addChapter : {visible:false},
-            addPage : {visible:false},
-            pauseDataRetrieval : {visible:false},
-            insertVisualization : {visible:false}, 
-            insertFilter : {visible:false},
-            tableOfContents : {visible:false},
+
+            addData: { visible: false },
+            addChapter: { visible: false },
+            addPage: { visible: false },
+            pauseDataRetrieval: { visible: false },
+            insertVisualization: { visible: false },
+            insertFilter: { visible: false },
+            tableOfContents: { visible: false },
 
 
         },
@@ -393,12 +394,13 @@ function authoring() {
             layers: true,
         },
     };
+    // console.log()
+    // debugger;
 
-
-    dossier
-        .switchToMode("authoring")
-        .then((e) => console.log(e))
-        .catch((error) => console.error(error));
+    // dossier
+    //     .switchToMode("authoring")
+    //     .then((e) => console.log(e))
+    //     .catch((error) => console.error(error));
 
     dossier = window.microstrategy.dossier.create(config);
 
@@ -413,6 +415,7 @@ function getPanels() {
                 row += `<option value="${currentPagePanelStacks[i].panels[j].key}" id = "${currentPagePanelStacks[i].panels[j].key}" class="${currentPagePanelStacks[i].panels[j].name}">${currentPagePanelStacks[i].panels[j].name}</option>`;
             }
         }
+        console.log(row);
         document.querySelector(".panel").innerHTML = row;
         if (row.length > 0) {
             console.log("Wow, panel found!");
@@ -427,70 +430,81 @@ function getPanels() {
 
 
 function selectChanged(tag) {
-    dossier.switchPanel(document.querySelector('option:checked').value).then((switchPanel) => {
+    dossier.switchPanel(document.getElementById("panellist").value).then((switchPanel) => {
         console.log("Panel switched to ", switchPanel);
+        updateWidgetList();
+        // $("#panelListDropdown").hide();
+        // $("#panellist").hide();
     })
+
+    // dossier.switchPanel(document.querySelector('option:checked').value).then((switchPanel) => {
+    //     console.log("Panel switched to ", switchPanel);
+    // })
 }
 
 
-function responsiveHeight(){
+
+function responsiveHeight() {
     const container = document.getElementById("embedding-dossier-container");
     const marginBottom = 15;
     container.style.minHeight = "calc(100vh - " + (container.offsetTop + marginBottom) + "px)";
-    console.log("Container Top  Offset - ",container.offsetTop)
-} 
+    console.log("Container Top  Offset - ", container.offsetTop)
+}
 
 
 function fullscreen() {
     const container = document.getElementById("embedding-dossier-container");
     container.requestFullscreen();
-  }
+}
 
 
 
-  function resizeWidget(size) {
+function resizeWidget(size) {
     if (dossier) {
-      const vizListElement = document.getElementById("vizList");
-      const selectedKey = vizListElement.value;
-      dossier.changeVisualizationSize
-      ({
-          visualizationKey: selectedKey,
-          size: size,
-        })
-        .then((visualization) => {console.log("Following Widget Resized:",visualization);}).catch((error) => {console.error(error);});
+        const vizListElement = document.getElementById("vizList");
+        const selectedKey = vizListElement.value;
+        dossier.changeVisualizationSize({
+                visualizationKey: selectedKey,
+                size: size,
+            })
+            .then((visualization) => { console.log("Following Widget Resized:", visualization); }).catch((error) => { console.error(error); });
     }
-  }
+}
 
 
 
-  function updateWidgetList() {
+function updateWidgetList() {
+    // getPanels();
     if (dossier) {
-      dossier.getCurrentPageVisualizationList().then((visualizations) => {
-        console.log("Widget List : ",visualizations);
-        let row = "";
+        dossier.getCurrentPageVisualizationList().then((visualizations) => {
+            console.log("Widget List : ", visualizations);
+            let row = "";
 
-        for (viz of visualizations) {
-          console.log(viz.key,viz.name)
-          row += `<option value="${viz.key}" id = "${viz.key}" class="${viz.name}">${viz.name}</option>`;
-        }
-        document.querySelector(".vizList").innerHTML = row;
-      });
+            for (viz of visualizations) {
+                console.log(viz.key, viz.name)
+                row += `<option value="${viz.key}" id = "${viz.key}" class="${viz.name}">${viz.name}</option>`;
+            }
+            document.querySelector(".vizList").innerHTML = row;
+        });
     }
-  }
+    updateFilters();
+}
 
 
 
 //  PDF & Excel Export
-async function exportPDFExcel(type){
-
+async function exportPDFExcel(type, allSingle) {
+    const exptype = allSingle === "SINGLE" ? false : true;
+    console.log(allSingle);
+    console.log(exptype);
     const pdfExportBody = JSON.stringify({
         includeOverview: true,
-        includeDetailedPages: true,  // All or Single pages
+        includeDetailedPages: exptype, // All or Single pages //true or false /* each visualization printed on an individual page */
         includeHeader: true,
         includeFooter: true,
         includeToc: false,
         orientation: "NONE",
-        pageOption: "ALL",
+        pageOption: allSingle, //"SINGLE", //"ALL", /* to export all of the pages of the document */
         pageHeight: 8.5,
         pageWidth: 11,
         viewportHeight: 0,
@@ -500,115 +514,115 @@ async function exportPDFExcel(type){
         fitToPage: true,
         repeatColumnHeader: true,
         responsiveView: false,
-      });
+    });
 
 
-      const excelExportBody = JSON.stringify({
+    const excelExportBody = JSON.stringify({
         sliceId: 0,
         pageOption: "ALL", // All pages or current page
-      });
+    });
 
-      const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary";
-      const dossierId = sessionStorage.getItem("dossierid");
-      const token = await getAuthToken (baseURL);
-
-
-      let instanceId = await dossier.getDossierInstanceId().then((id) => id)
-      .catch((error) => {console.error(error); return null;});
-
-      console.log("Dossier Instance ID :",instanceId)
-
-      const exportBody = type === "pdf" ? pdfExportBody : excelExportBody;
+    const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary";
+    const dossierId = sessionStorage.getItem("dossierid");
+    const token = await getAuthToken(baseURL);
 
 
-      let options = {
+    let instanceId = await dossier.getDossierInstanceId().then((id) => id)
+        .catch((error) => { console.error(error); return null; });
+
+    console.log("Dossier Instance ID :", instanceId)
+
+    const exportBody = type === "pdf" ? pdfExportBody : excelExportBody;
+
+
+    let options = {
         method: "POST",
         credentials: "include",
         mode: "cors",
         headers: {
-          "content-type": "application/json",
-          "x-mstr-authtoken": token,
-          "x-mstr-projectid": sessionStorage.getItem("projid"),
+            "content-type": "application/json",
+            "x-mstr-authtoken": token,
+            "x-mstr-projectid": sessionStorage.getItem("projid"),
         },
         body: exportBody,
-      };
+    };
 
-      console.log("EXPORT STARTED");
-        await fetch(baseURL +"/api/documents/" + dossierId +"/instances/" +instanceId +"/" + type, options)
+    console.log("EXPORT STARTED");
+    await fetch(baseURL + "/api/documents/" + dossierId + "/instances/" + instanceId + "/" + type, options)
         .then((response) => {
             console.log("Yay!! Export Completed");
             if (type === "pdf") {
-              response.json().then((responseJson) => {
+                response.json().then((responseJson) => {
 
-                const byteCharacters = atob(responseJson.data);
-                console.log("byteCharacters",byteCharacters);
+                    const byteCharacters = atob(responseJson.data);
+                    console.log("byteCharacters", byteCharacters);
 
-                const byteNumbers = [];
-                for (var i = 0; i < byteCharacters.length; i++) {
-                  byteNumbers.push(byteCharacters.charCodeAt(i));
-                }
-                console.log("byteNumbers",byteNumbers)
+                    const byteNumbers = [];
+                    for (var i = 0; i < byteCharacters.length; i++) {
+                        byteNumbers.push(byteCharacters.charCodeAt(i));
+                    }
+                    console.log("byteNumbers", byteNumbers)
 
-                const byteArray = new Uint8Array(byteNumbers);
-                console.log("byteArray",byteArray)
+                    const byteArray = new Uint8Array(byteNumbers);
+                    console.log("byteArray", byteArray)
 
-                const file = new Blob([byteArray], {
-                  type: "application/pdf;base64",
+                    const file = new Blob([byteArray], {
+                        type: "application/pdf;base64",
+                    });
+                    console.log("file", file);
+
+                    const link = document.createElement("a");
+                    const url = URL.createObjectURL(file);
+
+                    link.href = url;
+
+                    link.download = "PDF EXport File";
+
+                    link.click();
                 });
-                console.log("file",file);
-
-                const link = document.createElement("a");
-                const url = URL.createObjectURL(file);
-
-                link.href = url;
-
-                link.download = "PDF EXport File";
-
-                link.click();
-              });
             } else {
-              response.blob().then((blob) => {
-                const link = document.createElement("a");
-                const url = URL.createObjectURL(blob);
-                link.href = url;
-                link.download = "excelExportFile.xlsx";
-                link.click();
-              });
+                response.blob().then((blob) => {
+                    const link = document.createElement("a");
+                    const url = URL.createObjectURL(blob);
+                    link.href = url;
+                    link.download = "excelExportFile.xlsx";
+                    link.click();
+                });
             }
-          })
-          .catch((error) => {
+        })
+        .catch((error) => {
             console.error("Exporting has failed with error:", error);
-          });
+        });
 
 }
 
 
-async function userSync(){
+async function userSync() {
 
     const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary";
-    const token = await getAuthToken (baseURL);
+    const token = await getAuthToken(baseURL);
 
     var authUsers = [{
-        "fullName": "Saama UserSync",
-        "username": "UserSync",
-        "description": "User Sync Test",
-        "password": ""
-      },
+            "fullName": "Saama UserSync",
+            "username": "UserSync",
+            "description": "User Sync Test",
+            "password": ""
+        },
 
-      {
-        "fullName": "Saama1 UserSync1",
-        "username": "UserSync1",
-        "description": "User1 Sync1 Test1",
-        "password": ""
-      }
+        {
+            "fullName": "Saama1 UserSync1",
+            "username": "UserSync1",
+            "description": "User1 Sync1 Test1",
+            "password": ""
+        }
     ]
-   
-   
-    for (let i=0;i<authUsers.length;i++){
+
+
+    for (let i = 0; i < authUsers.length; i++) {
 
         const raw = JSON.stringify(authUsers[i]);
-        createUser(token,raw,baseURL);
-        
+        createUser(token, raw, baseURL);
+
     }
 
 
@@ -618,23 +632,56 @@ async function userSync(){
         method: 'GET',
         credentials: 'include',
         mode: 'cors',
-        headers: {'Content-Type': 'application/json',
-                'x-mstr-authtoken': token
-                }
+        headers: {
+            'Content-Type': 'application/json',
+            'x-mstr-authtoken': token
+        }
     }
 
-    await fetch(baseURL+ "/api/users", options)
-    .then(response => response.text())
-    .then(result => 
-         {
+    await fetch(baseURL + "/api/users", options)
+        .then(response => response.text())
+        .then(result => {
             users = result;
-            
-         }
-        )
-    .catch(error => console.log('error', error));
+
+        })
+        .catch(error => console.log('error', error));
 
     users = JSON.parse(users);
 
-    console.log("MSTR User List - ",users);
+    console.log("MSTR User List - ", users);
 
+}
+
+
+async function populateProjects() {
+    const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary"
+    const token = await getAuthToken(baseURL)
+    getProjects(baseURL, token).then((projectList) => {
+
+        let row = "";
+        for (project of projectList.projects) {
+            console.log(project.name, project.id)
+            row += `<option value="${project.id}" id = "${project.id}">${project.name}</option>`;
+        }
+
+        document.querySelector(".projectList").innerHTML = row;
+    })
+}
+
+
+async function createDossier(project) {
+    // $("#projectListDropdown").hide();
+    let projectID = document.querySelector(".projectList").value
+    const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary"
+    const token = await getAuthToken(baseURL)
+    searchDossier(projectID, token).then((dossierTemplate) => {
+        // debugger;
+        let dossierID = dossierTemplate.result[0].id
+        console.log("Dossier ID ", dossierID)
+        console.log("Project ID ", projectID)
+        let url = baseURL + "/app" + "/" + projectID + "/" + dossierID;
+        runCode(url);
+        authoring();
+
+    })
 }
