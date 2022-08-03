@@ -13,7 +13,10 @@
 
         <nav class="navbar navbar-dark bg-primary">
             <h1 style="color:white;">KPI Studio (MicroStrategy) Dashboard Library</h1>
-
+            <h6>Focus</h6>
+            <select class = "focus" style="margin-right: 10px;" onchange="populateAnalytics(this);"></select>
+            <h6>Analytics</h6>
+            <select class = "analytics" style="margin-right: 10px;" onchange="selectChanged(this);"></select>
             <ul class="navbar-nav">
 
             </ul>

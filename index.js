@@ -78,11 +78,6 @@ function showFilterValues(filter) {
         return filterValueDiv;
     }
 
-    // if (filter.filterDetail.supportMultiple) {
-    //     filterValueDiv = '<select multiple key="' + filterKey + '" class="chosen-select" id="filter' + filterKey + '">';
-    // } else {
-    //     filterValueDiv = '<select key="' + filterKey + '" class="chosen-select" id="filter' + filterKey + '">';
-    // }
 
     if (filter.filterDetail.supportMultiple) {
         filterValueDiv = '<select multiple key="' + filterKey + '" name="' + filterName + '" class="chosen-select" id="filter' + filterKey + '">';
@@ -134,7 +129,7 @@ function applyFilter(type) {
 
     }
     dossier.filterApplyAll();
-    // updateFilters();
+    updateFilters();
 }
 
 // Function to set all attribute filter checkboxes to be true(checked) or false(unchecked)
@@ -242,8 +237,8 @@ async function runCode(url) {
     config = {
         url: url,
         placeholder: document.getElementById("embedding-dossier-container"),
-        containerHeight: "700px",
-        containerWidth: "600px",
+        // containerHeight: "700px",
+        // containerWidth: "600px",
         navigationBar: {
             enabled: true,
             gotoLibrary: true,
@@ -284,6 +279,12 @@ async function runCode(url) {
     }
 
 
+    // const container = document.getElementById("embedding-dossier-container");
+    // const marginBottom = 5;
+    // container.style.minHeight = "calc(100vh - " + (container.offsetTop + marginBottom) + "px)";
+
+    responsiveHeight()
+
 
     // INSERT METHODS BELOW HERE
     updateFilters();
@@ -293,6 +294,15 @@ async function runCode(url) {
         updateFilters();
         getPanels();
 
+    }
+
+
+    updateWidgetList();
+
+    function eventPageSwitchedFunction(e) {
+        /* Add any functionality for event needed here */
+        updateWidgetList();
+        // getPanels();
     }
 
     // Update filters when page switches
@@ -326,6 +336,7 @@ async function runCode(url) {
     );
 
     getPanels();
+    populateProjects();
 
     // Get all pages
     var toc = dossier.getTableContent();
@@ -346,66 +357,65 @@ function dosparam() {
 
 
 function authoring() {
-
-    /* Enable Authoring Mode Configuration Start */
-    // The following config properties must be removed to allow dossier authoring
+    updateRequiredFunction();
     delete config["instance"];
     delete config["filters"];
     delete config["visualizationAppearances"];
     delete config["visualizationSelectedElements"];
 
-    // Set to authoring mode
-    config.dossierRenderingMode = "authoring"; // Can be "authoring" or "consumption"
-    config.navigationBar.edit = true; // Show the edit icon in navigation bar
-    /* Enable Authoring Mode Configuration End */
+    config.dossierRenderingMode = "authoring";
 
-    /* Customize Authoring Mode Properties Start */
     config.authoring = {
         menubar: {
             library: {
-                visible: false, // Show library icon
+                visible: true,
             },
         },
+
+
         toolbar: {
-            // For full list of options see documentation
-            addData: { visible: false }, // Hide add data
+
+            addData: { visible: false },
+            addChapter: { visible: false },
+            addPage: { visible: false },
+            pauseDataRetrieval: { visible: false },
+            insertVisualization: { visible: false },
+            insertFilter: { visible: false },
+            tableOfContents: { visible: false },
+
+
         },
+
         panelVisibility: {
             contents: true,
-            datasets: true,
+            datasets: false,
             editor: true,
             filter: true,
             format: true,
             layers: true,
         },
     };
-    /* Customize Authoring Mode Properties End */
 
-    // Embed the dossier with the configuration settings
 
-    /* Switch to Authoring Mode Start */
     dossier
         .switchToMode("authoring")
         .then((e) => console.log(e))
         .catch((error) => console.error(error));
-    /* Switch to Authoring Mode End */
-
-    /* Create a dossier by using authoring configurations Start */
 
     dossier = window.microstrategy.dossier.create(config);
 
-    /* Create a dossier by using authoring configurations End */
 }
 
 function getPanels() {
 
     dossier.getCurrentPagePanelStacks().then((currentPagePanelStacks) => {
-        var row = "";
-        for (var i = 0; i < currentPagePanelStacks.length; i++) {
-            for (var j = 0; j < currentPagePanelStacks[i].panels.length; j++) {
+        let row = "";
+        for (let i = 0; i < currentPagePanelStacks.length; i++) {
+            for (let j = 0; j < currentPagePanelStacks[i].panels.length; j++) {
                 row += `<option value="${currentPagePanelStacks[i].panels[j].key}" id = "${currentPagePanelStacks[i].panels[j].key}" class="${currentPagePanelStacks[i].panels[j].name}">${currentPagePanelStacks[i].panels[j].name}</option>`;
             }
         }
+        console.log(row);
         document.querySelector(".panel").innerHTML = row;
         if (row.length > 0) {
             console.log("Wow, panel found!");
@@ -420,7 +430,257 @@ function getPanels() {
 
 
 function selectChanged(tag) {
-    dossier.switchPanel(document.querySelector('option:checked').value).then((switchPanel) => {
+    dossier.switchPanel(document.getElementById("panellist").value).then((switchPanel) => {
         console.log("Panel switched to ", switchPanel);
+        updateWidgetList();
+        $("#panelListDropdown").hide();
+        // $("#panellist").hide();
+    })
+
+    // dossier.switchPanel(document.querySelector('option:checked').value).then((switchPanel) => {
+    //     console.log("Panel switched to ", switchPanel);
+    // })
+}
+
+
+
+function responsiveHeight() {
+    const container = document.getElementById("embedding-dossier-container");
+    const marginBottom = 15;
+    container.style.minHeight = "calc(100vh - " + (container.offsetTop + marginBottom) + "px)";
+    console.log("Container Top  Offset - ", container.offsetTop)
+}
+
+
+function fullscreen() {
+    const container = document.getElementById("embedding-dossier-container");
+    container.requestFullscreen();
+}
+
+
+
+function resizeWidget(size) {
+    if (dossier) {
+        const vizListElement = document.getElementById("vizList");
+        const selectedKey = vizListElement.value;
+        dossier.changeVisualizationSize({
+                visualizationKey: selectedKey,
+                size: size,
+            })
+            .then((visualization) => { console.log("Following Widget Resized:", visualization); }).catch((error) => { console.error(error); });
+    }
+}
+
+
+
+function updateWidgetList() {
+    // getPanels();
+    if (dossier) {
+        dossier.getCurrentPageVisualizationList().then((visualizations) => {
+            console.log("Widget List : ", visualizations);
+            let row = "";
+
+            for (viz of visualizations) {
+                console.log(viz.key, viz.name)
+                row += `<option value="${viz.key}" id = "${viz.key}" class="${viz.name}">${viz.name}</option>`;
+            }
+            document.querySelector(".vizList").innerHTML = row;
+        });
+    }
+    updateFilters();
+}
+
+
+
+//  PDF & Excel Export
+async function exportPDFExcel(type, allSingle) {
+    const exptype = allSingle === "SINGLE" ? false : true;
+    console.log(allSingle);
+    console.log(exptype);
+    const pdfExportBody = JSON.stringify({
+        includeOverview: true,
+        includeDetailedPages: exptype, // All or Single pages //true or false /* each visualization printed on an individual page */
+        includeHeader: true,
+        includeFooter: true,
+        includeToc: false,
+        orientation: "NONE",
+        pageOption: allSingle, //"SINGLE", //"ALL", /* to export all of the pages of the document */
+        pageHeight: 8.5,
+        pageWidth: 11,
+        viewportHeight: 0,
+        viewportWidth: 0,
+        filterSummary: "PAGE",
+        gridPagingMode: "none",
+        fitToPage: true,
+        repeatColumnHeader: true,
+        responsiveView: false,
+    });
+
+
+    const excelExportBody = JSON.stringify({
+        sliceId: 0,
+        pageOption: "ALL", // All pages or current page
+    });
+
+    const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary";
+    const dossierId = sessionStorage.getItem("dossierid");
+    const token = await getAuthToken(baseURL);
+
+
+    let instanceId = await dossier.getDossierInstanceId().then((id) => id)
+        .catch((error) => { console.error(error); return null; });
+
+    console.log("Dossier Instance ID :", instanceId)
+
+    const exportBody = type === "pdf" ? pdfExportBody : excelExportBody;
+
+
+    let options = {
+        method: "POST",
+        credentials: "include",
+        mode: "cors",
+        headers: {
+            "content-type": "application/json",
+            "x-mstr-authtoken": token,
+            "x-mstr-projectid": sessionStorage.getItem("projid"),
+        },
+        body: exportBody,
+    };
+
+    console.log("EXPORT STARTED");
+    await fetch(baseURL + "/api/documents/" + dossierId + "/instances/" + instanceId + "/" + type, options)
+        .then((response) => {
+            console.log("Yay!! Export Completed");
+            if (type === "pdf") {
+                response.json().then((responseJson) => {
+
+                    const byteCharacters = atob(responseJson.data);
+                    console.log("byteCharacters", byteCharacters);
+
+                    const byteNumbers = [];
+                    for (var i = 0; i < byteCharacters.length; i++) {
+                        byteNumbers.push(byteCharacters.charCodeAt(i));
+                    }
+                    console.log("byteNumbers", byteNumbers)
+
+                    const byteArray = new Uint8Array(byteNumbers);
+                    console.log("byteArray", byteArray)
+
+                    const file = new Blob([byteArray], {
+                        type: "application/pdf;base64",
+                    });
+                    console.log("file", file);
+
+                    const link = document.createElement("a");
+                    const url = URL.createObjectURL(file);
+
+                    link.href = url;
+
+                    link.download = "PDF EXport File";
+
+                    link.click();
+                });
+            } else {
+                response.blob().then((blob) => {
+                    const link = document.createElement("a");
+                    const url = URL.createObjectURL(blob);
+                    link.href = url;
+                    link.download = "excelExportFile.xlsx";
+                    link.click();
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("Exporting has failed with error:", error);
+        });
+
+}
+
+
+async function userSync() {
+
+    const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary";
+    const token = await getAuthToken(baseURL);
+
+    var authUsers = [{
+            "fullName": "Saama UserSync",
+            "username": "UserSync",
+            "description": "User Sync Test",
+            "password": ""
+        },
+
+        {
+            "fullName": "Saama1 UserSync1",
+            "username": "UserSync1",
+            "description": "User1 Sync1 Test1",
+            "password": ""
+        }
+    ]
+
+
+    for (let i = 0; i < authUsers.length; i++) {
+
+        const raw = JSON.stringify(authUsers[i]);
+        createUser(token, raw, baseURL);
+
+    }
+
+
+    var users = "";
+
+    var options = {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-mstr-authtoken': token
+        }
+    }
+
+    await fetch(baseURL + "/api/users", options)
+        .then(response => response.text())
+        .then(result => {
+            users = result;
+
+        })
+        .catch(error => console.log('error', error));
+
+    users = JSON.parse(users);
+
+    console.log("MSTR User List - ", users);
+
+}
+
+
+async function populateProjects() {
+    const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary"
+    const token = await getAuthToken(baseURL)
+    getProjects(baseURL, token).then((projectList) => {
+
+        let row = "";
+        for (project of projectList.projects) {
+            console.log(project.name, project.id)
+            row += `<option value="${project.id}" id = "${project.id}">${project.name}</option>`;
+        }
+
+        document.querySelector(".projectList").innerHTML = row;
+    })
+}
+
+
+async function createDossier(project) {
+    $("#projectListDropdown").hide();
+    let projectID = document.querySelector(".projectList").value
+    const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary"
+    const token = await getAuthToken(baseURL)
+    searchDossier(projectID, token).then((dossierTemplate) => {
+        let dossierID = dossierTemplate.result[0].id
+        console.log("Dossier ID ", dossierID)
+        console.log("Project ID ", projectID)
+        let url = baseURL + "/app" + "/" + projectID + "/" + dossierID;
+        runCode(url);
+        authoring();
+
     })
 }

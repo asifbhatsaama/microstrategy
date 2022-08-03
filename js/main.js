@@ -4,7 +4,24 @@
     getSession(baseURL, token)
     .then((session) => {
 
-        extendSession(baseURL,token)
+        extendSession(baseURL,token);
+        // console.log("CONTENT GROUPS LIST - ",getContentGroups(baseURL,token));
+        // for (let i = 0;i<getContentGroups(baseURL,token).length;i++){
+        //     console.log(i.name);
+        // }
+
+        getContentGroups(baseURL,token).then((focus)=>{
+            let row = "";
+            for (i=0;i<focus.contentBundles.length;i++){
+                const name = focus.contentBundles[i].name;
+                const content_group_id = focus.contentBundles[i].id;
+                row+=` <option value="${name}" id = "${content_group_id}" class="focus">${name}</option>`;
+            }
+            document.querySelector(".focus").innerHTML= row;
+            }
+        );
+
+        // console.log("CONTENT GROUPS CHILD - ",getContentGroupsChild(baseURL,token));
         getLibrary(baseURL, token).then((library)=> {
             var table = document.getElementById("dossierTable");
             for (i = 0; i < library.length; i++) {
@@ -51,4 +68,32 @@
     })
 
     
+}
+
+
+function populateAnalytics(test) {
+    const baseURL= sessionStorage.getItem("baseURL");
+    const token = sessionStorage.getItem("token");
+
+    groupid = document.querySelector('option:checked').id
+
+    getProjects(baseURL,token).then((projects)=>{
+        console.log(projects);
+        let row = "";
+    for (let j =0;j<projects.projects.length;j++){
+        const projectId = projects.projects[j].id
+       
+    getContentGroupsChild(baseURL,token,groupid,projectId).then((analytics)=>{
+        console.log(analytics);
+        for (let i =0;i< analytics[projectId].length;i++){
+            let name = analytics[projectId][i].name;
+            let dossierid = analytics[projectId].id;
+            row+=` <option value="${name}" id = "${dossierid}" class="analytics">${name}</option>`;
+        }
+
+        document.querySelector(".analytics").innerHTML= row;        
+
+    })
+    }
+  })
 }

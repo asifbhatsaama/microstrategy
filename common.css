@@ -3,11 +3,12 @@
 .headerContainer {
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     height: 50px;
     width: 100%;
     background-color: darkblue;
     color: white;
+    justify-content: space-between;
 }
 
 .mainContainer {
@@ -108,6 +109,26 @@
     color: #fff;
     border-radius: 0.25rem;
     border-color: #0d6efd;
+}
+
+.vizlist {
+    height: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: darkblue;
+    color: #fff;
+    border-radius: 0.25rem;
+    border-color: #0d6efd;
+    margin-top: 10px;
+}
+
+.projectList {
+    height: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: darkblue;
+    color: #fff;
+    border-radius: 0.25rem;
+    border-color: #0d6efd;
+    margin-top: 10px;
 }
 
 .filterControlLink {
