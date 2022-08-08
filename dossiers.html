@@ -1,52 +1,53 @@
 <html>
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/style.css">
-        <script src="js/main.js"></script>
-        <script src="js/API.js"></script>
-        <script src="https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
-    </head>
 
-    <body>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js"></script>
+    <script src="js/API.js"></script>
+    <script src="https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
+</head>
 
-        <nav class="navbar navbar-dark bg-primary">
-            <h1 style="color:white;">KPI Studio (MicroStrategy) Dashboard Library</h1>
-            <h6>Focus</h6>
-            <select class = "focus" style="margin-right: 10px;" onchange="populateAnalytics(this);"></select>
-            <h6>Analytics</h6>
-            <select class = "analytics" style="margin-right: 10px;" onchange="selectChanged(this);"></select>
-            <ul class="navbar-nav">
+<body>
 
-            </ul>
-            <div class="navbar-text" id="usermessage"></div>
-            <div class="" id="logoutButton" onclick=""></div>
-        </nav>
+    <nav class="navbar navbar-dark bg-primary">
+        <h1 style="color:white;">KPI Studio (MicroStrategy) Dashboard Library</h1>
+        <h6>Focus</h6>
+        <select class="focus" style="margin-right: 10px;" onchange="populateAnalytics(this);"></select>
+        <h6>Analytics</h6>
+        <select class="analytics" style="margin-right: 10px;" onchange="selectChanged(this);"></select>
+        <ul class="navbar-nav">
 
-        <div style="width:100%;overflow:hidden;padding:10px;">
-                <div id="library">
-                    <table class="table table-striped" id="dossierTable">
-                        <tr>
-                            <th>Dossier/Dashboard Name</th>
-                            <th>Dossier/Dashboard ID</th>
-                            <th>Dossier Owner</th>
-                            <th>Last Viewed Time</th>
-                            <th>Project Id</th>
-                            <th>Last Modified</th>
-                            <th>Dossier Owner</th>
+        </ul>
+        <div class="navbar-text" id="usermessage"></div>
+        <div class="" id="logoutButton" onclick=""></div>
+    </nav>
 
-                        </tr>
-                    </table>
-                </div>
-                <div id="dossierTitle"></div>
-                <div id="dossierPlaceholder"></div>
+    <div style="width:100%;overflow:hidden;padding:10px;">
+        <div id="library">
+            <table class="table table-striped" id="dossierTable">
+                <tr>
+                    <th>Dossier/Dashboard Name</th>
+                    <th>Dossier/Dashboard ID</th>
+                    <th>Dossier Owner</th>
+                    <th>Last Viewed Time</th>
+                    <th>Project Id</th>
+                    <th>Last Modified</th>
+                    <th>Dossier Owner</th>
+
+                </tr>
+            </table>
         </div>
+        <div id="dossierTitle"></div>
+        <div id="dossierPlaceholder"></div>
+    </div>
 
-    </body>
+</body>
 
-    <script>
-        startLibrary();
-    </script>
+<script>
+    startLibrary();
+</script>
 
 </html>

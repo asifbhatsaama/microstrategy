@@ -103,8 +103,8 @@
 }
 
 .panel {
-    height: 40px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* height: 40px; */
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
     background-color: darkblue;
     color: #fff;
     border-radius: 0.25rem;
@@ -112,23 +112,23 @@
 }
 
 .vizlist {
-    height: 40px;
+    /* height: 40px; */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: darkblue;
     color: #fff;
     border-radius: 0.25rem;
     border-color: #0d6efd;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .projectList {
-    height: 40px;
+    /* height: 40px; */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: darkblue;
     color: #fff;
     border-radius: 0.25rem;
     border-color: #0d6efd;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .filterControlLink {

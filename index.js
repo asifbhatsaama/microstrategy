@@ -6,6 +6,11 @@ let url = "";
 let dossier; // Variable to store the dossier created. Used by Event Handler do not remove!
 let config; // Variable to store the configuration settings for dossier.
 const attributeSelector = "attributeSelector"; // Variable to store string for attributeSelector filter type
+
+var projectID = sessionStorage.getItem("projid") 
+var dossierID = sessionStorage.getItem("dossierid")
+const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary"
+
 // Function to update filters will be called in runCode() after dossier is created and onclick from Update Filters by default.
 async function updateFilters() {
     let filterList = await dossier.getFilterList();
@@ -341,6 +346,10 @@ async function runCode(url) {
     // Get all pages
     var toc = dossier.getTableContent();
     var listOfChapters = dossier.getChapterList();
+    
+    // Reset Page Panel 
+    document.querySelector(".button-holder").innerHTML="" 
+
     for (let i = 0; i < listOfChapters.length; i++) {
         for (let j = 0; j < listOfChapters[i].children.length; j++) {
             node = "dossier.navigateToPage(dossier.getPageByNodeKey(" + `'` + listOfChapters[i].children[j].nodeKey + `'` + "))"
@@ -466,6 +475,7 @@ function resizeWidget(size) {
         dossier.changeVisualizationSize({
                 visualizationKey: selectedKey,
                 size: size,
+                // size: 'maximized'
             })
             .then((visualization) => { console.log("Following Widget Resized:", visualization); }).catch((error) => { console.error(error); });
     }
@@ -481,7 +491,7 @@ function updateWidgetList() {
             let row = "";
 
             for (viz of visualizations) {
-                console.log(viz.key, viz.name)
+                // console.log(viz.key, viz.name)
                 row += `<option value="${viz.key}" id = "${viz.key}" class="${viz.name}">${viz.name}</option>`;
             }
             document.querySelector(".vizList").innerHTML = row;
@@ -660,7 +670,7 @@ async function populateProjects() {
 
         let row = "";
         for (project of projectList.projects) {
-            console.log(project.name, project.id)
+            // console.log(project.name, project.id)
             row += `<option value="${project.id}" id = "${project.id}">${project.name}</option>`;
         }
 
@@ -670,12 +680,12 @@ async function populateProjects() {
 
 
 async function createDossier(project) {
-    // $("#projectListDropdown").hide();
+
     let projectID = document.querySelector(".projectList").value
     const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary"
     const token = await getAuthToken(baseURL)
     searchDossier(projectID, token).then((dossierTemplate) => {
-        // debugger;
+
         let dossierID = dossierTemplate.result[0].id
         console.log("Dossier ID ", dossierID)
         console.log("Project ID ", projectID)
@@ -684,4 +694,100 @@ async function createDossier(project) {
         authoring();
 
     })
+}
+
+
+async function saveStory(){
+    let bookmarkName = document.querySelector(".bookmark-name").value;
+
+    const token = await getAuthToken(baseURL)
+
+    console.log("Saving Filter Story...")
+
+    let dossierInstanceID = await createDossierInstance(token,baseURL,projectID,dossierID).then((dossierInstanceID) => dossierInstanceID)
+    dossierInstanceID = dossierInstanceID.mid
+    console.log("New Dossier Instance - ",dossierInstanceID)
+
+    let instanceDetails = await dossierInstanceInfo(token,baseURL,projectID,dossierID,dossierInstanceID).then((instanceDetails) => instanceDetails)
+    console.log("Instance Details with Shortcut - ",instanceDetails)
+
+    let shortcutID= instanceDetails.shortcut.id
+    console.log("Shortcut ID -",shortcutID)
+
+    let bookmarkID = await createBookmark(token,baseURL,projectID,dossierInstanceID,bookmarkName).then((bookmark) => bookmark.id)
+    console.log("New Bookmark with ID ", bookmarkID, " created")
+
+    let bookmarks = await getBookmarks(token,baseURL,projectID,shortcutID).then((bookmarks) => bookmarks)
+    console.log("All Dossier Bookmarks - ",bookmarks)
+
+    let bookmarkURL = baseURL+ "/app/" + projectID + "/" + dossierID + "/" + "bookmarks?ids=" + bookmarkID
+    console.log("Bookmark URL ", bookmarkURL)
+
+    sessionStorage.setItem("shortcutID", shortcutID);
+    sessionStorage.setItem("bookmarkid", bookmarkID);
+    sessionStorage.setItem("bookmarkURL", bookmarkURL);
+
+    console.log("Filter Story saved succcessfully!!!")
+
+    $(".dropdown-content-create-bm").hide();
+    listUserStories();
+
+}
+
+
+async function deleteFilterStory(ele){
+
+    let bookmarkID = ele.getAttribute("bookmarkID")
+    let shortcutID = ele.getAttribute("shortcutID")
+ 
+    const token = await getAuthToken(baseURL)
+
+    let status = await deleteBookmarkApi(token,baseURL,projectID,shortcutID,bookmarkID).then((response)=>response) 
+
+    console.log("Bookmark with name & id deleted",status)
+
+}
+
+
+async function listUserStories(){
+
+    const token = await getAuthToken(baseURL)
+
+    let dossierInstanceID = await createDossierInstance(token,baseURL,projectID,dossierID).then((dossierInstanceID) => dossierInstanceID)
+    dossierInstanceID = dossierInstanceID.mid
+
+    let instanceDetails = await dossierInstanceInfo(token,baseURL,projectID,dossierID,dossierInstanceID).then((instanceDetails) => instanceDetails)
+
+    let shortcutID= instanceDetails.shortcut.id
+
+    let filterStories = await getBookmarks(token,baseURL,projectID,shortcutID).then((bookmarks) => bookmarks)
+
+    console.log("User Filter Story List ",filterStories)
+    
+    document.querySelector(".filterStoryList").innerHTML=""
+
+    let row = "";
+    for (let i in filterStories) {
+            let bookmarkURL = baseURL+ "/app/" + projectID + "/" + dossierID + "/" + "bookmarks?ids=" + filterStories[i].id
+            // row += `<option value="${filterStories[i].name}" id = "${filterStories[i].id}" class="${filterStories[i].name}">${filterStories[i].id}</option>`;
+            row+= `<ul class="bookmarkList"><button url ="${bookmarkURL}" onclick = "embedBookmark(this)">${filterStories[i].name}</button><button class="shareBookmark-Icon"><i class='fas fa-share' style='font-size:24px; font-size: 9px'></i></button><button class="editBookmark-Icon" bookmarkID = "${filterStories[i].id}" shortcutID = "${shortcutID}"><i class='fas fa-pen' style='font-size:24px; font-size: 9px'></i></button><button class="deleteBookmark-Icon" bookmarkID = "${filterStories[i].id}" shortcutID = "${shortcutID}" onclick = "deleteFilterStory(this)"><i class='far fa-trash-alt' style='font-size:24px; font-size: 9px'></i></button></ul>`
+        }
+
+       $(".filterStoryList").append(row)
+}
+
+
+
+// document.querySelector(".deleteBookmark-Icon").addEventListener("click", function () {
+//     console.log("Hello")
+//     let b_id = $(".deleteBookmark-Icon").attr("bookmarkID")
+//     let s_id = $(".deleteBookmark-Icon").attr("shortcutID")
+//     deleteStory(b_id,s_id)
+//   });
+
+
+
+function embedBookmark(ele){
+   let  url = ele.getAttribute("url")
+   runCode(url);
 }

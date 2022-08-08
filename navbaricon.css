@@ -1,0 +1,363 @@
+.btn-link {
+    font-weight: bold;
+}
+
+
+/* .migrationlistdropbtn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 5;
+} */
+
+
+/* .dropdown-content-ml {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+} */
+
+.bookmarklistdropbtn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+   
+}
+
+.dropdown-content-bm {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 230px;
+    padding-bottom: 10px;
+}
+
+
+/* .createBookmarkListDropdown {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 5;
+} */
+
+.dropdown-content-create-bm {
+    display: none;
+    /* position: absolute; */
+    background-color: #f1f1f1;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    /*  */
+    /* display: block; */
+    margin-left: -15px;
+    border: solid #0e6ff9 2px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.maximizelistdropbtn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+.minimizeIcon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+.userdropbtn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+.widgetlistdropbtn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+.projectlistdropbtn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+.plusIcon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+.authoringIcon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+.taskIcon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+.bookmarkIcon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+.panellistdropbtn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+
+/* .userdropbtn:hover,
+.userdropbtn:focus {
+    background-color: #2980B9;
+} */
+
+.exportdropbtn {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    margin-left: 510;
+}
+
+
+/* .exportdropbtn:hover,
+.exportdropbtn:focus {
+    background-color: #2980B9;
+} */
+
+.userDropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: -18
+}
+
+.exportDropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content-pl {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content-pl a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content-panellist {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content-panellist a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content-usericon {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content-usericon a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.userDropdown a:hover {
+    background-color: #ddd;
+}
+
+.exportDropdown a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: flex;
+    flex-direction: column;
+}
+
+.show1 {
+    display: flex;
+    flex-direction: column;
+    margin-left: 520px;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu button::after {
+    transform: rotate(90deg);
+    position: absolute;
+    right: 85px;
+    top: 15px;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    margin-left: .1rem;
+    margin-right: .1rem;
+    /* left: -203%; */
+    left: -161px;
+}
+
+#navbarNavDropdown {
+    margin-right: 20px
+}
+
+.dalia {
+    border-radius: 8px;
+    margin-bottom: 2px;
+    width: 120px;
+}
+
+.username {
+    padding-bottom: 2px;
+    border-bottom: 2px solid darkblue;
+}
+
+input[type="search"]::placeholder {
+    text-align: center;
+}
+
+.msfContainer {
+    margin-left: 270px;
+}
+
+.daliaContainer {
+    margin-top: 9px
+}
+
+#daliaDossierList_chosen {
+    color: black;
+}
+
+
+/* #daliaDossierList {} */
+
+.createBookmark-Icon {
+    /* height: 2px;
+    width: 2px; */
+    border: none;
+    margin-left: 160px;
+    margin-top: 2px;
+}
+
+.shareBookmark-Icon {
+    /* height: 2px;
+    width: 2px; */
+    border: none;
+}
+
+.editBookmark-Icon {
+    /* height: 2px;
+    width: 2px; */
+    border: none;
+}
+
+.deleteBookmark-Icon {
+    /* height: 2px;
+    width: 2px; */
+    border: none;
+}
+
+.bookmarkList {
+    margin-left: 65px;
+    margin-top: 5px;
+}
+
+
+/* .dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+} */
+
+.bookmark-name {
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 2px;
+    margin-left: 2px;
+}
+
+.bm-save-cancel-btngroup {
+    margin-bottom: 10px
+}
+
+.bookmark-cancel {
+    border: none;
+    color: #0e6ff9;
+}
+
+.bookmark-save {
+    border: none;
+    color: #0e6ff9;
+}

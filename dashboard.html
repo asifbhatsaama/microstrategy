@@ -5,6 +5,7 @@
     <script type="text/javascript" src="https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
     <link rel="stylesheet" href="./chosen.min.css">
     <link rel="stylesheet" href="./common.css">
+    <link rel="stylesheet" href="./navbaricon.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -12,8 +13,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
@@ -23,138 +22,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-    <style>
-        .btn-link {
-            font-weight: bold;
-        }
-        
-        .userdropbtn {
-            height: 40px;
-            width: 40px;
-            border-radius: 50px;
-            margin-top: 5;
-        }
-        
-        .widgetlistdropbtn {
-            height: 40px;
-            width: 40px;
-            border-radius: 50px;
-            margin-top: 5;
-        }
-        
-        .projectlistdropbtn {
-            height: 40px;
-            width: 40px;
-            border-radius: 50px;
-            margin-top: 5;
-        }
-        
-        .plusIcon {
-            height: 40px;
-            width: 40px;
-            border-radius: 50px;
-            margin-top: 5;
-        }
-        
-        .authoringIcon {
-            height: 40px;
-            width: 40px;
-            border-radius: 50px;
-            margin-top: 5;
-        }
-        
-        .panellistdropbtn {
-            height: 40px;
-            width: 40px;
-            border-radius: 50px;
-            margin-top: 5;
-        }
-        
-        .userdropbtn:hover,
-        .userdropbtn:focus {
-            background-color: #2980B9;
-        }
-        
-        .exportdropbtn {
-            height: 50px;
-            width: 50px;
-            border-radius: 50px;
-            margin-left: 510;
-        }
-        
-        .exportdropbtn:hover,
-        .exportdropbtn:focus {
-            background-color: #2980B9;
-        }
-        
-        .userDropdown {
-            position: relative;
-            display: inline-block;
-            margin-left: -18
-        }
-        
-        .exportDropdown {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f1f1f1;
-            overflow: auto;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-        
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .userDropdown a:hover {
-            background-color: #ddd;
-        }
-        
-        .exportDropdown a:hover {
-            background-color: #ddd;
-        }
-        
-        .show {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .show1 {
-            display: flex;
-            flex-direction: column;
-            margin-left: 520px;
-        }
-        
-        .dropdown-submenu {
-            position: relative;
-        }
-        
-        .dropdown-submenu button::after {
-            transform: rotate(90deg);
-            position: absolute;
-            right: 85px;
-            top: 15px;
-        }
-        
-        .dropdown-submenu .dropdown-menu {
-            top: 0;
-            margin-left: .1rem;
-            margin-right: .1rem;
-            left: -203%;
-        }
-        
-        #navbarNavDropdown {
-            margin-right: 20px
-        }
-    </style>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+
+
 </head>
 
 <body onload="dosparam();">
@@ -163,39 +37,102 @@
             <h3 style="text-align: center;margin-top: 10px; position: relative">MicroStrategy POC</h3>
         </div>
 
+        <div class="msfContainer">
+            <div class="msf">
+                <select name="" id=""></select>
+            </div>
+        </div>
+
+
         <div class="extremeRight" style="display: flex;">
 
-            <!-- <button class="plusIcon"><i class="material-icons">add</i></button> -->
+            <div class="daliaContainer">
+                <select class="chosen" id="daliaDossierList" onchange="daliaDossier(this)" style="width:200px;" data-placeholder="Ask DaLIA"></select>
+            </div>
+
+
+
+            <div class="bookmarkListDropdown" onclick="listUserStories()">
+                <button class="bookmarklistdropbtn filterswitchhorizontally" onclick="openbmtab()"><i class='far fa-bookmark' style='font-size:24px'></i>
+                </button>
+                
+                <ul id="bookmarkListDropdown" class="dropdown-content-bm" style="margin-left: -120px;">
+
+                    <div class="createBookmarkListDropdown">
+                        <button class="createBookmark-Icon" id="createBookmark-Icon" onclick="createbm()"><i class="fa fa-plus-circle" style="font-size:24px; font-size: 12px"></i></button>
+
+                        <div id="createBookmarkListDropdown" class="dropdown-content-create-bm">
+                            <input type="text" class="bookmark-name" placeholder="Bookmark Name">
+                            <div class="bm-save-cancel-btngroup">
+                                <button class="bookmark-cancel" onclick="cancel()">Cancel</button>
+                                <button class="bookmark-save" onclick="saveStory()">Save</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="filterStoryList" style="margin-left: -120px;">
+
+                    </div>
+
+                    <!-- <ul class="bookmarkList">
+                        <a href="#">Bookmark 1</a>
+                        <button class="shareBookmark-Icon"><i class='fas fa-share' style='font-size:24px; font-size: 9px'></i></button>
+                        <button class="editBookmark-Icon"><i class='fas fa-pen' style='font-size:24px; font-size: 9px'></i></button>
+                        <button class="deleteBookmark-Icon"><i class='far fa-trash-alt' style='font-size:24px; font-size: 9px'></i></button>
+                    </ul>
+
+                    <ul class="bookmarkList">
+                        <a href="#">Bookmark 2</a>
+                        <button class="shareBookmark-Icon"><i class='fas fa-share' style='font-size:24px; font-size: 9px'></i></button>
+                        <button class="editBookmark-Icon"><i class='fas fa-pen' style='font-size:24px; font-size: 9px'></i></button>
+                        <button class="deleteBookmark-Icon"><i class='far fa-trash-alt' style='font-size:24px; font-size: 9px'></i></button>
+                    </ul>
+
+                    <ul class="bookmarkList">
+                        <a href="#">Bookmark 3</a>
+                        <button class="shareBookmark-Icon"><i class='fas fa-share' style='font-size:24px; font-size: 9px'></i></button>
+                        <button class="editBookmark-Icon"><i class='fas fa-pen' style='font-size:24px; font-size: 9px'></i></button>
+                        <button class="deleteBookmark-Icon"><i class='far fa-trash-alt' style='font-size:24px; font-size: 9px'></i></button>
+                    </ul> -->
+
+                </ul>
+
+
+            </div>
+
+
+
+            <button class="taskIcon" onclick="listUserStories()"><i class="fas fa-tasks"></i></button>
+
+
+            <div class="maximizeIcon">
+                <button class="maximizelistdropbtn filterswitchhorizontally"><i class='fas fa-expand-alt' style='font-size:24px'></i>
+                </button>
+                <div id="maximizeIcon" class="dropdown-content" style="margin-left: -120px;">
+                    <select class="vizList filterswitchhorizontally" onchange="resizeWidget('maximized')" style="vertical-align: inherit; font-size: revert" id="vizList" size="15"></select>
+                </div>
+            </div>
+
+            <button class="minimizeIcon" onclick="resizeWidget('normal')"><i class='fas fa-compress-alt' style='font-size:24px'></i></button>
 
             <div class="projectListDropdown">
-                <button onclick="projectListIconFunction()" class="projectlistdropbtn filterswitchhorizontally"><i class="material-icons">add</i>
+                <button class="projectlistdropbtn filterswitchhorizontally"><i class="material-icons">add</i>
                 </button>
-                <div id="projectListDropdown" class="dropdown-content" style="margin-left: -120px;">
-                    <select class="projectList filterswitchhorizontally" onchange="createDossier(this)" style="margin-right: 10px; vertical-align: inherit; font-size: revert" id="projectList"></select>
+                <div id="projectListDropdown" class="dropdown-content-pl" style="margin-left: -120px;">
+                    <select class="projectList filterswitchhorizontally" onchange="createDossier(this)" style="vertical-align: inherit; font-size: revert" id="projectList" size="15"></select>
                 </div>
             </div>
             <!-- btn btn-primary filterswitchhorizontally -->
             <!-- background-color:darkblue; vertical-align: inherit; height: 35px -->
             <button class="authoringIcon" onclick="authoring()"><i class='fas fa-pen' style='font-size:24px'></i></button>
 
-            <div class="widgetListDropdown">
-                <button onclick="widgetListIconFunction()" class="widgetlistdropbtn filterswitchhorizontally"><i class="fa fa-pie-chart" style="font-size:24px"></i>
-                </button>
-                <div id="widgetListDropdown" class="dropdown-content" style="margin-left: -160px;">
-                    <select class="vizList filterswitchhorizontally" style="margin-right: 10px; vertical-align: inherit; font-size: revert" id="vizList"></select>
-                    <div class="minmax-btn" style="margin-left: 20px;">
-                        <button class="btn btn-primary filterswitchhorizontally" onclick="resizeWidget('maximized')" style="background-color:darkblue; vertical-align: inherit;width: 50px; margin-left: -5px"><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
-                        <button class="btn btn-primary filterswitchhorizontally" onclick="resizeWidget('normal')" style="background-color:darkblue; vertical-align: inherit;width: 50px; margin-left: -5px"><i class="fa fa-minus-square-o" aria-hidden="true"></i></button>
-                    </div>
-
-                </div>
-            </div>
-
             <div class="panelListDropdown">
-                <button onclick="panelListIconFunction()" class="panellistdropbtn filterswitchhorizontally"><i class='fas fa-th-list' style='font-size:24px'></i>
+                <button class="panellistdropbtn filterswitchhorizontally"><i class='fas fa-th-list' style='font-size:24px'></i>
                 </button>
-                <div id="panelListDropdown" class="dropdown-content" style="margin-left: -224px;">
-                    <select id="panellist" class="panel" style="/*margin-right: -100px;*/ vertical-align: inherit;" onchange="selectChanged(this);"></select>
+                <div id="panelListDropdown" class="dropdown-content-panellist" style="margin-left: -224px;">
+                    <select id="panellist" class="panel" style="margin-right: -30px; vertical-align: inherit;" onchange="selectChanged(this);" size="15"></select>
                     <div id="panelStacksPanel"></div>
                 </div>
             </div>
@@ -205,10 +142,10 @@
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <button class="nav-link dropdown-toggle1" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="
-                        height: 40px; width: 40px; border-radius: 50px;margin-top: 5;">
+                        height: 40px; width: 40px; border-radius: 50px;margin-top: 2;">
               <i class='fas fa-file-export' style='font-size:24px; color:black'></i>
             </button>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="min-width:100px">
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="min-width:100px; margin: 0px -30px 0px">
 
                                 <li class="dropdown-submenu">
                                     <button class="dropdown-item dropdown-toggle">PDF</button>
@@ -234,12 +171,17 @@
             </nav>
 
             <div class="userDropdown">
-                <button onclick="userIconFunction()" class="userdropbtn filterswitchhorizontally"><i class="fa fa-user" aria-hidden="true"></i>
+                <button class="userdropbtn filterswitchhorizontally"><i class="fa fa-user" aria-hidden="true"></i>
                 </button>
-                <div id="userDropdown" class="dropdown-content" style="margin-left: -80px;">
+                <div id="userDropdown" class="dropdown-content-usericon" style="margin-left: -105px;">
+                    <div class="username">
+                        <div id="username" style="background-color: darkblue; font-size: 11px;"></div>
+                    </div>
+
                     <button class="btn btn-primary filterswitchhorizontally" onclick="fullscreen()" style="background-color:darkblue; vertical-align: inherit;width: 106px; height: 35px">Full Screen</button>
                     <!-- <button class="btn btn-primary filterswitchhorizontally" onclick="authoring()" style="background-color:darkblue; vertical-align: inherit; height: 35px">Edit</button> -->
                     <button class="btn btn-primary filterswitchhorizontally" onclick="userSync()" style="background-color:darkblue; vertical-align: inherit; height: 35px">UserSync</button>
+                    <button class="btn btn-primary filterswitchhorizontally" onclick="userLogout()" style="background-color:darkblue; vertical-align: inherit; height: 35px">Log Out</button>
 
                 </div>
             </div>
@@ -279,137 +221,79 @@
         <div id="embedding-dossier-container"></div>
 
     </div>
+
+    <script type="text/javascript">
+        $("#daliaDossierList").chosen();
+        async function getLibrary() {
+            var options = {
+                method: 'GET',
+                credentials: 'include',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-mstr-authtoken': sessionStorage.getItem('token')
+                }
+            }
+            let baseURL = sessionStorage.getItem('baseURL');
+            return fetch(baseURL + '/api/library', options)
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json()
+                    } else {
+                        throw (new Error("Get Library Error"));
+                    }
+                })
+        }
+
+        getLibrary().then((library) => {
+            // debugger
+            console.log(library);
+            // debugger
+            var daliaList = $(".chosen");
+            var daliaData = "";
+            var daliaDossierList = "";
+            $("#daliaDossierList").append($('<option></option>'));
+
+            for (let i = 0; i < library.length; i++) {
+                const dashboardId = library[i].target.id
+                const projectId = library[i].projectId;
+                const dashboardName = library[i].name;
+                console.log(dashboardId);
+                console.log(projectId);
+                console.log(dashboardName);
+
+                daliaDossierList += '<option className="dossier" value="' + projectId + '" id="' + dashboardId + '" />' + dashboardName + '</option>';
+
+                // return daliaDossierList;
+            }
+
+            $("#daliaDossierList").append(daliaDossierList);
+
+            $('#daliaDossierList').trigger("chosen:updated");
+        })
+
+
+
+
+        function daliaDossier(selecteddossier) {
+
+            var projid = selecteddossier[selecteddossier.selectedIndex].value;
+            var dossierid = selecteddossier[selecteddossier.selectedIndex].id
+            console.log(projid);
+            console.log(dossierid);
+            sessionStorage.setItem('projid', projid);
+            sessionStorage.setItem('dossierid', dossierid);
+            dosparam();
+
+
+        }
+    </script>
+
     <script src="./chosen.jquery.min.js"></script>
     <script src="./index.js"></script>
     <script src="./js/API.js"></script>
-    <script>
-        function projectListIconFunction() {
-            console.log("Inside Project Icon Function");
-            document.getElementById("projectListDropdown").classList.toggle("show");
-            // $("#projectListDropdown").show();
-        }
+    <script src="./navbaricon.js"></script>
 
-        window.onclick = function(event) {
-            console.log("Inside widget func Function");
-            if (!event.target.matches('.projectlistdropbtn')) {
-                console.log("Inside widget list drop Function");
-                let dropdowns = document.getElementsByClassName("dropdown-content");
-                let i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    let openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-
-
-
-        function widgetListIconFunction() {
-            console.log("Inside widget Icon Function");
-            document.getElementById("widgetListDropdown").classList.toggle("show");
-        }
-
-        window.onclick = function(event) {
-            console.log("Inside widget func Function");
-            if (!event.target.matches('.widgetlistdropbtn')) {
-                console.log("Inside widget list drop Function");
-                let dropdowns = document.getElementsByClassName("dropdown-content");
-                let i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    let openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-        // $(window).click(function() {
-        //     $("#panelListDropdown").hide();
-        //     console.log("Hide");
-
-        // });
-
-        function panelListIconFunction() {
-            console.log("Inside panel Icon Function");
-            document.getElementById("panelListDropdown").classList.toggle("show");
-            // $("#panelListDropdown").show();
-            // $("#panellist").show();
-        }
-
-        window.onclick = function(event) {
-            console.log("Inside widget func Function");
-            if (!event.target.matches('.panellistdropbtn')) {
-                console.log("Inside panel list drop Function");
-                let dropdowns = document.getElementsByClassName("dropdown-content");
-                let i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    let openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-        function userIconFunction() {
-            console.log("Inside User Icon Function");
-            document.getElementById("userDropdown").classList.toggle("show");
-        }
-
-        window.onclick = function(event) {
-            console.log("Inside User func Function");
-            if (!event.target.matches('.userdropbtn')) {
-                console.log("Inside User drop Function");
-                let dropdowns = document.getElementsByClassName("dropdown-content");
-                let i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    let openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-        function exportIconFunction() {
-            console.log("Inside Export Icon Function");
-            document.getElementById("exportDropdown").classList.toggle("show1");
-        }
-
-        window.onclick = function(event) {
-            if (!event.target.matches('.exportdropbtn')) {
-                let dropdowns = document.getElementsByClassName("dropdown-content");
-                let i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    let openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show1')) {
-                        openDropdown.classList.remove('show1');
-                    }
-                }
-            }
-        }
-
-
-        $('.dropdown-menu button.dropdown-toggle').on('click', function(e) {
-            if (!$(this).next().hasClass('show')) {
-                $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
-            }
-            var $subMenu = $(this).next('.dropdown-menu');
-            $subMenu.toggleClass('show');
-
-
-            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
-                $('.dropdown-submenu .show').removeClass('show');
-            });
-
-
-            return false;
-        });
-    </script>
 </body>
 
 </html>

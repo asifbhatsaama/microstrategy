@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -18,16 +19,14 @@
             <label for="username">Username</label>
             <input class="form-control" type="text" id="username" placeholder="Username">
             <label for="password">Password</label>
-            <input class="form-control" type="password" id="password" placeholder="Password">         
-            <button  type="button" class="btn btn-primary" onclick="main();">Login</button>
+            <input class="form-control" type="password" id="password" placeholder="Password">
+            <button type="button" class="btn btn-primary" onclick="main();">Login</button>
         </div>
     </div>
 
 </body>
 
 <script>
- 
-    
     async function main() {
         const baseURL = "https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary";
         const username = document.getElementById("username").value;
@@ -35,15 +34,16 @@
         const loginMode = 1;
 
         login(baseURL, username, password, loginMode)
-        .then((token)=> {
-            sessionStorage.setItem("baseURL", baseURL);
-            sessionStorage.setItem("token", token);
-            location.href = "dossiers.html";
-        
-        }).catch(function (error) {
-            console.log(error);
-        })
-        
+            .then((token) => {
+                sessionStorage.setItem("baseURL", baseURL);
+                sessionStorage.setItem("token", token);
+                sessionStorage.setItem('username', username);
+                location.href = "dossiers.html";
+
+            }).catch(function(error) {
+                console.log(error);
+            })
+
     }
 </script>
 
