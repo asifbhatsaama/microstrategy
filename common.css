@@ -105,29 +105,30 @@
 .panel {
     /* height: 40px; */
     /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-    background-color: darkblue;
+    /* background-color: darkblue;
     color: #fff;
     border-radius: 0.25rem;
-    border-color: #0d6efd;
+    border-color: #0d6efd; */
+    display: none;
 }
 
 .vizlist {
     /* height: 40px; */
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: darkblue;
     color: #fff;
     border-radius: 0.25rem;
-    border-color: #0d6efd;
+    border-color: #0d6efd; */
     /* margin-top: 10px; */
 }
 
 .projectList {
     /* height: 40px; */
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: darkblue;
     color: #fff;
     border-radius: 0.25rem;
-    border-color: #0d6efd;
+    border-color: #0d6efd; */
     /* margin-top: 10px; */
 }
 

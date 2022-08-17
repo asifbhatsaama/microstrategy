@@ -418,3 +418,98 @@ async function deleteBookmarkApi(token,baseURL,projectID,shortcutID,bookmarkID) 
     })
 
 }
+
+
+async function getFavoritesAPI(token){
+    var options = {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        redirect: 'follow',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-MSTR-AuthToken': token,
+        }
+    } 
+
+    return fetch(baseURL+ "/api/library/shortcutGroups", options)
+    .then(function(response) {
+        if (response.ok) {
+            return response.json()
+        } else {
+            throw (new Error("Fetching Dossier List Error"));
+        }
+    })
+}
+
+
+async function addFavoriteAPI(token,dossierID,projectID){
+    var raw = JSON.stringify({
+    "operationList": [
+        {
+        "op": "addElements",
+        "path": "/itemKeys",
+        "value": [
+            dossierID + "_" + projectID
+        ]
+        }
+    ]
+    });
+
+    var options = {
+        method: 'PATCH',
+        credentials: 'include',
+        mode: 'cors',
+        redirect: 'follow',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-MSTR-AuthToken': token,
+        },
+        body : raw
+    }     
+
+     fetch("https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/api/library/shortcutGroups/favorites", options)
+    .then(function(response) {
+        if (response.ok) {
+            console.log("Dossier Added to Homepage successfully!!!")
+        } else {
+            throw (new Error("Fetching Dossier List Error"));
+        }
+    })
+}
+
+
+async function removeFavoriteAPI(token,dossierID,projectID){
+    var raw = JSON.stringify({
+    "operationList": [
+        {
+        "op": "removeElements",
+        "path": "/itemKeys",
+        "value": [
+            dossierID + "_" + projectID
+        ]
+        }
+    ]
+    });
+
+    var options = {
+        method: 'PATCH',
+        credentials: 'include',
+        mode: 'cors',
+        redirect: 'follow',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-MSTR-AuthToken': token,
+        },
+        body : raw
+    }     
+
+    fetch("https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/api/library/shortcutGroups/favorites", options)
+    .then(function(response) {
+        if (response.ok) {
+            console.log("Dossier removed from Homepage successfully!!!")
+        } else {
+            throw (new Error("Fetching Dossier List Error"));
+        }
+    })
+}

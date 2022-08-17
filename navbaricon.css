@@ -25,7 +25,6 @@
     width: 40px;
     border-radius: 50px;
     margin-top: 2;
-   
 }
 
 .dropdown-content-bm {
@@ -52,7 +51,7 @@
     /* position: absolute; */
     background-color: #f1f1f1;
     overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
     z-index: 1;
     /*  */
     /* display: block; */
@@ -165,9 +164,9 @@
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    /* background-color: #f1f1f1; */
+    /* overflow: auto; */
+    /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
     z-index: 1;
 }
 
@@ -181,9 +180,9 @@
 .dropdown-content-pl {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    /* background-color: #f1f1f1; */
+    /* overflow: auto; */
+    /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
     z-index: 1;
 }
 
@@ -197,9 +196,9 @@
 .dropdown-content-panellist {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    /* background-color: #f1f1f1; */
+    /* overflow: auto; */
+    /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
     z-index: 1;
 }
 
@@ -287,9 +286,10 @@ input[type="search"]::placeholder {
     margin-left: 270px;
 }
 
-.daliaContainer {
+
+/* .daliaContainer {
     margin-top: 9px
-}
+} */
 
 #daliaDossierList_chosen {
     color: black;
@@ -344,12 +344,17 @@ input[type="search"]::placeholder {
     margin-bottom: 5px;
     border-radius: 5px;
     border: none;
-    margin-top: 2px;
-    margin-left: 2px;
+    margin-top: 6px;
+    margin-left: 8px;
+}
+
+#createBookmarkListDropdown {
+    margin-left: -21px;
 }
 
 .bm-save-cancel-btngroup {
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    margin-left: 4px;
 }
 
 .bookmark-cancel {
@@ -361,3 +366,51 @@ input[type="search"]::placeholder {
     border: none;
     color: #0e6ff9;
 }
+
+.bookmarkButton {
+    border: none;
+    color: blue;
+}
+
+.hideshowfilters {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+#vizList_chosen {
+    width: 200px;
+    color: black;
+}
+
+#projectList_chosen {
+    width: 200px;
+    color: black;
+}
+
+#panellist_chosen {
+    width: 200px;
+    color: black;
+}
+
+#panellist {
+    display: none;
+}
+
+
+.dalia {
+    border-radius: 8px;
+    margin-bottom: 2px;
+    width: 120px;
+}
+
+
+.msfContainer {
+    margin-left: 270px;
+    }
+
+    .msfapply-btn {
+        margin-right: 50px;
+        border-radius: 5px;
+    }

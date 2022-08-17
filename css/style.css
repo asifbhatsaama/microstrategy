@@ -1,104 +1,123 @@
-.navbar{
+/* .navbar{
     margin-bottom: 10px;
-}
-.nav-item{
+} */
+
+.nav-item {
     /* font-size: 20pt; */
-    font-size:1.1vw;
+    font-size: 1.1vw;
 }
-.navbar-brand{
+
+.navbar-brand {
     /* font-size: 30pt; */
-    font-size:2vw;
-    color:white;
+    font-size: 2vw;
+    color: white;
 }
-.navbar-nav{
+
+.navbar-nav {
     margin-left: 50px;
 }
-.table-striped{
-    font-size:0.75vw;
+
+.table-striped {
+    font-size: 0.75vw;
 }
-#usermessage{
-    color:lightgreen;
-    position:absolute;
-    right:20px;
-    font-size:1.5vw;
+
+#usermessage {
+    color: lightgreen;
+    position: absolute;
+    right: 20px;
+    font-size: 1.5vw;
 }
-.form-control{
+
+.form-control {
     margin-bottom: 10px;
 }
-.highlight { 
+
+.highlight {
     background-color: #f75454 !important;
 }
-#loginbox{
-    width:25%;
-    display:inline-block;
-    text-align:left;
-}
-.outerbox{
-    width:100%;
-    overflow:hidden;
-    text-align:center;
-}
-#dossierTable{
-    width:100%;
-    margin-top:20px;
-    cursor:pointer;
-}
-#dossierTitle{
-    text-align:center;
-    background-color:lightgrey;
-    padding:10px;
-    display:none;
+
+#loginbox {
+    width: 25%;
+    display: inline-block;
+    text-align: left;
 }
 
-.errorMsg{
-    color:red;
+.outerbox {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
 }
 
-.infoSection{
-    width:100%;
-    display:block;
-    overflow:auto;
-    background-color:lightgray;
+#dossierTable {
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
 }
-.infoBox{
-    width:40%;
-    float:left;
-    padding:20px;
+
+#dossierTitle {
+    text-align: center;
+    background-color: lightgrey;
+    padding: 10px;
+    display: none;
+}
+
+.errorMsg {
+    color: red;
+}
+
+.infoSection {
+    width: 100%;
+    display: block;
+    overflow: auto;
+    background-color: lightgray;
+}
+
+.infoBox {
+    width: 40%;
+    float: left;
+    padding: 20px;
     font-size: 1vw;
 }
-.infoCell{
-    padding:5px 10px 5px 5px;
+
+.infoCell {
+    padding: 5px 10px 5px 5px;
     text-align: right;
 }
-.scrollableDiv{
-    height:60%;
-    overflow-y:auto;
-    overflow-x:hidden;
-}
-.specificTables{
-    width:30%;
-    margin:5px;
-    float:left;
-}
-.tableHeader{
-    white-space:nowrap;
+
+.scrollableDiv {
+    height: 60%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.autocomplete-items{
-    width:65%;
-    max-height:10%;
+.specificTables {
+    width: 30%;
+    margin: 5px;
+    float: left;
+}
+
+.tableHeader {
+    white-space: nowrap;
+}
+
+.autocomplete-items {
+    width: 65%;
+    max-height: 10%;
     overflow-y: auto;
 }
+
 .autocomplete-items div {
     padding: 5px;
     cursor: pointer;
-    background-color: #fff; 
-    border-bottom: 1px solid #d4d4d4; 
-    width:100%;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+    width: 100%;
 }
+
 .autocomplete-items div:hover {
-  background-color: silver; 
+    background-color: silver;
 }
+
 .triangle-right {
     width: 0;
     height: 0;
@@ -108,6 +127,7 @@
     display: inline-block;
     margin-right: 10px;
 }
+
 .triangle-down {
     width: 0;
     height: 0;
@@ -118,22 +138,26 @@
     margin-right: 10px;
 }
 
-.fa-external-link{
-    margin-left:10px;
-}
-.fa-external-link:hover{
-    cursor:alias;
-}
-.threeDivs{
-    width:33%;
-    padding:10px;
-    float:left;
+.fa-external-link {
+    margin-left: 10px;
 }
 
-.h1, h1 {
+.fa-external-link:hover {
+    cursor: alias;
+}
+
+.threeDivs {
+    width: 33%;
+    padding: 10px;
+    float: left;
+}
+
+.h1,
+h1 {
     font-size: 1.6rem;
 }
 
-h3{
-    position: absolute;left:5
+h3 {
+    position: absolute;
+    left: 5
 }

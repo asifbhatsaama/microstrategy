@@ -28,6 +28,67 @@
     <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        input[type=text],
+        select,
+        textarea {
+            width: 90%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+        
+        input[type=submit] {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        
+        .task-container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 400px;
+        }
+        
+        .formPopup {
+            display: none;
+            position: fixed;
+            left: 81%;
+            top: 5.8%;
+            border: 3px solid #999999;
+            z-index: 9;
+        }
+        
+        .formContainer {
+            max-width: 300px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+
+
+    </style>
+
 
 </head>
 
@@ -36,33 +97,39 @@
         <div style="flex-direction: row;display: flex;justify-content: center;">
             <h3 style="text-align: center;margin-top: 10px; position: relative">MicroStrategy POC</h3>
         </div>
+        <!-- <div style="display: flex; flex-direction: row;"> -->
 
-        <div class="msfContainer">
-            <div class="msf">
-                <select name="" id=""></select>
+            <!-- <div class="daliaContainer">
+                <select class="chosen" id="daliaDossierList" onchange="daliaDossier(this)" style="width:200px;" data-placeholder="Ask DaLIA"></select>
             </div>
-        </div>
+        </div> -->
 
-
-        <div class="extremeRight" style="display: flex;">
+        <div style="display: flex; flex-direction: row;">
+            <div class="msfContainer" style="display:flex; flex-direction: row;">
+                <div class="msf" id="msf">
+                    <select multiple class="chosen" id="masterstudyFilter" style="width:200px;"></select>
+                    <button class="msfapply-btn" onclick="applyMSF()">Apply</button>
+                </div>
+            </div>
 
             <div class="daliaContainer">
                 <select class="chosen" id="daliaDossierList" onchange="daliaDossier(this)" style="width:200px;" data-placeholder="Ask DaLIA"></select>
             </div>
+        </div>
 
-
+        <div class="extremeRight" style="display: flex;">
 
             <div class="bookmarkListDropdown" onclick="listUserStories()">
                 <button class="bookmarklistdropbtn filterswitchhorizontally" onclick="openbmtab()"><i class='far fa-bookmark' style='font-size:24px'></i>
                 </button>
-                
+
                 <ul id="bookmarkListDropdown" class="dropdown-content-bm" style="margin-left: -120px;">
 
                     <div class="createBookmarkListDropdown">
                         <button class="createBookmark-Icon" id="createBookmark-Icon" onclick="createbm()"><i class="fa fa-plus-circle" style="font-size:24px; font-size: 12px"></i></button>
 
                         <div id="createBookmarkListDropdown" class="dropdown-content-create-bm">
-                            <input type="text" class="bookmark-name" placeholder="Bookmark Name">
+                            <input type="text" class="bookmark-name" placeholder="Filter Story Name">
                             <div class="bm-save-cancel-btngroup">
                                 <button class="bookmark-cancel" onclick="cancel()">Cancel</button>
                                 <button class="bookmark-save" onclick="saveStory()">Save</button>
@@ -76,33 +143,12 @@
 
                     </div>
 
-                    <!-- <ul class="bookmarkList">
-                        <a href="#">Bookmark 1</a>
-                        <button class="shareBookmark-Icon"><i class='fas fa-share' style='font-size:24px; font-size: 9px'></i></button>
-                        <button class="editBookmark-Icon"><i class='fas fa-pen' style='font-size:24px; font-size: 9px'></i></button>
-                        <button class="deleteBookmark-Icon"><i class='far fa-trash-alt' style='font-size:24px; font-size: 9px'></i></button>
-                    </ul>
-
-                    <ul class="bookmarkList">
-                        <a href="#">Bookmark 2</a>
-                        <button class="shareBookmark-Icon"><i class='fas fa-share' style='font-size:24px; font-size: 9px'></i></button>
-                        <button class="editBookmark-Icon"><i class='fas fa-pen' style='font-size:24px; font-size: 9px'></i></button>
-                        <button class="deleteBookmark-Icon"><i class='far fa-trash-alt' style='font-size:24px; font-size: 9px'></i></button>
-                    </ul>
-
-                    <ul class="bookmarkList">
-                        <a href="#">Bookmark 3</a>
-                        <button class="shareBookmark-Icon"><i class='fas fa-share' style='font-size:24px; font-size: 9px'></i></button>
-                        <button class="editBookmark-Icon"><i class='fas fa-pen' style='font-size:24px; font-size: 9px'></i></button>
-                        <button class="deleteBookmark-Icon"><i class='far fa-trash-alt' style='font-size:24px; font-size: 9px'></i></button>
-                    </ul> -->
-
                 </ul>
 
 
             </div>
 
-
+            <button class="hideshowfilters" onclick="hideshowfilters()"><i class="fa fa-filter"></i></button>
 
             <button class="taskIcon" onclick="listUserStories()"><i class="fas fa-tasks"></i></button>
 
@@ -111,7 +157,8 @@
                 <button class="maximizelistdropbtn filterswitchhorizontally"><i class='fas fa-expand-alt' style='font-size:24px'></i>
                 </button>
                 <div id="maximizeIcon" class="dropdown-content" style="margin-left: -120px;">
-                    <select class="vizList filterswitchhorizontally" onchange="resizeWidget('maximized')" style="vertical-align: inherit; font-size: revert" id="vizList" size="15"></select>
+                    <select id="vizList" class="chosen vizList filterswitchhorizontally" onchange="resizeWidget('maximized')" style="width: 200px; "></select>
+                    <!-- vertical-align: inherit; font-size: revert; size:"15" -->
                 </div>
             </div>
 
@@ -121,7 +168,8 @@
                 <button class="projectlistdropbtn filterswitchhorizontally"><i class="material-icons">add</i>
                 </button>
                 <div id="projectListDropdown" class="dropdown-content-pl" style="margin-left: -120px;">
-                    <select class="projectList filterswitchhorizontally" onchange="createDossier(this)" style="vertical-align: inherit; font-size: revert" id="projectList" size="15"></select>
+                    <select id="projectList" class="chosen projectList filterswitchhorizontally" onchange="createDossier(this)" style="width: 200;"></select>
+                    <!--  vertical-align: inherit; font-size: revert -->
                 </div>
             </div>
             <!-- btn btn-primary filterswitchhorizontally -->
@@ -131,8 +179,9 @@
             <div class="panelListDropdown">
                 <button class="panellistdropbtn filterswitchhorizontally"><i class='fas fa-th-list' style='font-size:24px'></i>
                 </button>
-                <div id="panelListDropdown" class="dropdown-content-panellist" style="margin-left: -224px;">
-                    <select id="panellist" class="panel" style="margin-right: -30px; vertical-align: inherit;" onchange="selectChanged(this);" size="15"></select>
+                <div id="panelListDropdown" class="dropdown-content-panellist" style="margin-left: -140px;">
+                    <select id="panellist" class="chosen panel" style="width: 200px; display: none;" onchange="selectChanged(this);"></select>
+                    <!--  margin-right: -30px; vertical-align: inherit; -->
                     <div id="panelStacksPanel"></div>
                 </div>
             </div>
@@ -218,6 +267,62 @@
             </div>
         </div>
 
+
+
+
+
+        <div class="formPopup" id="popupForm">
+            <form class="formContainer">
+
+                <label for="fname">Title</label>
+                <input type="text" id="title" placeholder="Title..">
+
+                <label for="lname">Description</label>
+                <input type="text" id="desc" placeholder="Description..">
+
+                <label for="country">Task Type :</label>
+                <select id="task-type">
+                        <option value="threshold-breach">Threshold Breach</option>
+                        <option value="data-review">Data Review</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                <label for="">Priority :</label>
+                <select id="priority">
+                        <option value="urgent">Urgent</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </br>
+
+                <label for="">Date</label>
+                <input id="currentDate" type="date" />
+                </br>
+
+                <label for="assignee">Assignee</label>
+                <select id="assignee">
+                        <option value="">1</option>
+                        <option value="">2</option>
+                        <option value="">3</option>
+                    </select>
+                </br>
+
+                <label for="observer">Observer</label>
+                <select id="observer">
+                        <option value="">A</option>
+                        <option value="">B</option>
+                        <option value="">C</option>
+                    </select>
+                </br>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <!-- </div> -->
+
+
+
         <div id="embedding-dossier-container"></div>
 
     </div>
@@ -249,7 +354,7 @@
             // debugger
             console.log(library);
             // debugger
-            var daliaList = $(".chosen");
+            // var daliaList = $(".chosen");
             var daliaData = "";
             var daliaDossierList = "";
             $("#daliaDossierList").append($('<option></option>'));
@@ -264,7 +369,6 @@
 
                 daliaDossierList += '<option className="dossier" value="' + projectId + '" id="' + dashboardId + '" />' + dashboardName + '</option>';
 
-                // return daliaDossierList;
             }
 
             $("#daliaDossierList").append(daliaDossierList);
@@ -284,8 +388,6 @@
             sessionStorage.setItem('projid', projid);
             sessionStorage.setItem('dossierid', dossierid);
             dosparam();
-
-
         }
     </script>
 

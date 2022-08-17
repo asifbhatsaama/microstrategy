@@ -8,16 +8,73 @@
     <script src="js/main.js"></script>
     <script src="js/API.js"></script>
     <script src="https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
+    <link rel="stylesheet" href="./dossier.css">
+    <link rel="stylesheet" href="./chosen.min.css">
+    <style>
+        ul.tab {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+        /* Float the list items side by side */
+        
+        ul.tab li {
+            float: left;
+        }
+        /* Style the links inside the list items */
+        
+        ul.tab li a {
+            display: inline-block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+        /* Change background color of links on hover */
+        
+        ul.tab li a:hover {
+            background-color: #ddd;
+        }
+        /* Create an active/current tablink class */
+        
+        /* ul.tab li a:focus, */
+        .active {
+            background-color: #ccc;
+        }
+        
+        @-webkit-keyframes fadeEffect {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeEffect {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+
+
 </head>
 
-<body>
+<body onload="activeFavourite()">
 
     <nav class="navbar navbar-dark bg-primary">
         <h1 style="color:white;">KPI Studio (MicroStrategy) Dashboard Library</h1>
         <h6>Focus</h6>
-        <select class="focus" style="margin-right: 10px;" onchange="populateAnalytics(this);"></select>
+        <select class="focus" id = "focus" style="margin-right: 10px;width: 150px;" data-placeholder = "Focus" onchange="populateAnalytics(this);"></select>
         <h6>Analytics</h6>
-        <select class="analytics" style="margin-right: 10px;" onchange="selectChanged(this);"></select>
+        <select class="analytics" id = "analytics" style="margin-right: 10px;width: 150px;" data-placeholder = "Analytics" onchange="selectChanged(this);"></select>
         <ul class="navbar-nav">
 
         </ul>
@@ -25,7 +82,47 @@
         <div class="" id="logoutButton" onclick=""></div>
     </nav>
 
-    <div style="width:100%;overflow:hidden;padding:10px;">
+
+
+    <ul class="tab" style="display: flex; flex-direction: row; justify-content: space-between">
+    <div>
+        <li><a href="#" class="home-btn" onclick="">Home</a></li>
+        <li><a href="#" class="dash-lib" onclick="">Dashboard Library</a></li>
+    </div>
+
+    <div class="config-drop-appy">
+        <h5>Configure :</h5>
+
+        <select class="chosen" id="libraryDropdown" style="width: 200px;" onchange="dossierDetails(this)"></select>
+        <button type="button" class="btn btn-secondary btn-sm createfavouritebtn" onclick="addFavorite(this)">Create</button>
+        <button type="button" class="btn btn-secondary btn-sm removefavouritebtn" onclick="removeFavorite(this)">Remove</button>
+
+    </div>
+
+
+    </ul>
+
+
+
+
+
+    <div class="favourite-list tabcontent" onload="">
+        <div id="library">
+            <table class="table table-striped" id="favoriteTable">
+                <tr>
+                    <th>Dossier/Dashboard Name</th>
+                    <th>Dossier/Dashboard ID</th>
+                    <th>Dossier Owner</th>
+                    <th>Last Viewed Time</th>
+                    <th>Project Id</th>
+                    <th>Last Modified</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="library-list tabcontent">
         <div id="library">
             <table class="table table-striped" id="dossierTable">
                 <tr>
@@ -35,19 +132,46 @@
                     <th>Last Viewed Time</th>
                     <th>Project Id</th>
                     <th>Last Modified</th>
-                    <th>Dossier Owner</th>
-
                 </tr>
             </table>
         </div>
-        <div id="dossierTitle"></div>
-        <div id="dossierPlaceholder"></div>
     </div>
+
+    <div class="config-list tabcontent">
+        <div>Config Items Here</div>
+    </div>
+    <script src="./chosen.jquery.min.js"></script>
 
 </body>
 
 <script>
     startLibrary();
+
+    function activeFavourite() {
+        document.querySelector(".home-btn").classList.remove("active");
+        document.querySelector(".dash-lib").classList.add("active");
+        getFavorites();
+    }
+
+
+    $(".home-btn").click(function() {
+        $(".library-list").hide();
+        $(".config-list").hide();
+        $(".favourite-list").show();
+        document.querySelector(".dash-lib").classList.add("active");
+        // document.querySelector(".config").classList.add("active");
+        document.querySelector(".home-btn").classList.remove("active");
+    })
+
+    $(".dash-lib").click(function() {
+        $(".favourite-list").hide();
+        $(".config-list").hide();
+        $(".library-list").show();
+        document.querySelector(".home-btn").classList.add("active");
+        // document.querySelector(".config").classList.add("active");
+        document.querySelector(".dash-lib").classList.remove("active");
+
+    })
 </script>
 
 </html>
