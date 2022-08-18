@@ -10,6 +10,7 @@
     <script src="https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
     <link rel="stylesheet" href="./dossier.css">
     <link rel="stylesheet" href="./chosen.min.css">
+    <!-- <script src="./index.js"></script> -->
     <style>
         ul.tab {
             list-style-type: none;
@@ -39,11 +40,20 @@
             background-color: #ddd;
         }
         /* Create an active/current tablink class */
-        
         /* ul.tab li a:focus, */
+        
         .active {
             background-color: #ccc;
         }
+        
+        .activedash {
+            background-color: #e8f5ff;
+            border-bottom: 4px solid #1D96DD;
+        }
+        /* .opendash {
+            background-color: green;
+            border-bottom: 4px solid #1D96DD;
+        } */
         
         @-webkit-keyframes fadeEffect {
             from {
@@ -72,9 +82,9 @@
     <nav class="navbar navbar-dark bg-primary">
         <h1 style="color:white;">KPI Studio (MicroStrategy) Dashboard Library</h1>
         <h6>Focus</h6>
-        <select class="focus" id = "focus" style="margin-right: 10px;width: 150px;" data-placeholder = "Focus" onchange="populateAnalytics(this);"></select>
+        <select class="focus" id="focus" style="margin-right: 10px;width: 150px;" data-placeholder="Focus" onchange="populateAnalytics(this);"></select>
         <h6>Analytics</h6>
-        <select class="analytics" id = "analytics" style="margin-right: 10px;width: 150px;" data-placeholder = "Analytics" onchange="selectChanged(this);"></select>
+        <select class="analytics" id="analytics" style="margin-right: 10px;width: 150px;" data-placeholder="Analytics" onchange="selectChanged(this);"></select>
         <ul class="navbar-nav">
 
         </ul>
@@ -85,41 +95,24 @@
 
 
     <ul class="tab" style="display: flex; flex-direction: row; justify-content: space-between">
-    <div>
-        <li><a href="#" class="home-btn" onclick="">Home</a></li>
-        <li><a href="#" class="dash-lib" onclick="">Dashboard Library</a></li>
-    </div>
+        <div>
+            <li><a href="#" class="home-btn" onclick="">Home</a></li>
+            <li><a href="#" class="dash-lib" onclick="">Dashboard Library</a></li>
+        </div>
 
-    <div class="config-drop-appy">
-        <h5>Configure :</h5>
+        <div class="config-drop-appy">
+            <h5>Configure :</h5>
 
-        <select class="chosen" id="libraryDropdown" style="width: 200px;" onchange="dossierDetails(this)"></select>
-        <button type="button" class="btn btn-secondary btn-sm createfavouritebtn" onclick="addFavorite(this)">Create</button>
-        <button type="button" class="btn btn-secondary btn-sm removefavouritebtn" onclick="removeFavorite(this)">Remove</button>
+            <select class="chosen" id="libraryDropdown" style="width: 200px;" onchange="dossierDetails(this)"></select>
+            <button type="button" class="btn btn-secondary btn-sm createfavouritebtn" onclick="addFavorite(this)">Create</button>
+            <button type="button" class="btn btn-secondary btn-sm removefavouritebtn" onclick="removeFavorite(this)">Remove</button>
 
-    </div>
+        </div>
 
 
     </ul>
 
-
-
-
-
-    <div class="favourite-list tabcontent" onload="">
-        <div id="library">
-            <table class="table table-striped" id="favoriteTable">
-                <tr>
-                    <th>Dossier/Dashboard Name</th>
-                    <th>Dossier/Dashboard ID</th>
-                    <th>Dossier Owner</th>
-                    <th>Last Viewed Time</th>
-                    <th>Project Id</th>
-                    <th>Last Modified</th>
-                </tr>
-            </table>
-        </div>
-    </div>
+    <ul class="tab dashboard-tabs" style="display: flex; flex-direction: row;" onload="test()"></ul>
 
 
     <div class="library-list tabcontent">
@@ -141,16 +134,25 @@
         <div>Config Items Here</div>
     </div>
     <script src="./chosen.jquery.min.js"></script>
-
+    <div id="embedding-dossier-container"></div>
 </body>
 
 <script>
     startLibrary();
 
-    function activeFavourite() {
-        document.querySelector(".home-btn").classList.remove("active");
-        document.querySelector(".dash-lib").classList.add("active");
-        getFavorites();
+   async function activeFavourite() {
+        document.querySelector(".home-btn").classList.remove("active")
+        document.querySelector(".dash-lib").classList.add("active")
+        getFavorites()
+        const baseURL = sessionStorage.getItem("baseURL");
+        const token = sessionStorage.getItem("token");
+        const proj = await getProjects(baseURL, token).then((projects) => projects)
+        let arr = new Array()
+        for (let i in proj.projects){
+         arr.push(proj.projects[i].id)
+        }
+        projects = arr.join('&projectId=')
+        sessionStorage.setItem("projects",projects)
     }
 
 
@@ -159,8 +161,8 @@
         $(".config-list").hide();
         $(".favourite-list").show();
         document.querySelector(".dash-lib").classList.add("active");
-        // document.querySelector(".config").classList.add("active");
         document.querySelector(".home-btn").classList.remove("active");
+        $(".dashboard-tabs").show()
     })
 
     $(".dash-lib").click(function() {
@@ -168,8 +170,8 @@
         $(".config-list").hide();
         $(".library-list").show();
         document.querySelector(".home-btn").classList.add("active");
-        // document.querySelector(".config").classList.add("active");
         document.querySelector(".dash-lib").classList.remove("active");
+        $(".dashboard-tabs").hide()
 
     })
 </script>

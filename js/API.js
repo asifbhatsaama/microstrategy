@@ -269,29 +269,29 @@ async function searchDossier(projectID, token) {
 
 }
 
-async function createDossierInstance(token,baseURL,projectID,dossierID){
-    
+async function createDossierInstance(token, baseURL, projectID, dossierID) {
+
     var raw = JSON.stringify({
         "filters": null,
         "persistViewState": true,
         "resolveOnly": false
-        });
+    });
 
-    
+
     var options = {
-            method: 'POST',
-            credentials: 'include',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-MSTR-AuthToken': token,
-                'X-MSTR-ProjectID': projectID
-            },
-            body: raw
-        }        
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-MSTR-AuthToken': token,
+            'X-MSTR-ProjectID': projectID
+        },
+        body: raw
+    }
 
 
-        return fetch(baseURL+ "/api/dossiers/"+ dossierID +"/instances", options)
+    return fetch(baseURL + "/api/dossiers/" + dossierID + "/instances", options)
         .then(function(response) {
             if (response.ok) {
                 return response.json()
@@ -303,7 +303,7 @@ async function createDossierInstance(token,baseURL,projectID,dossierID){
 }
 
 
-async function dossierInstanceInfo(token,baseURL,projectID,dossierID, dossierInstanceID){
+async function dossierInstanceInfo(token, baseURL, projectID, dossierID, dossierInstanceID) {
 
     var options = {
         method: 'GET',
@@ -315,21 +315,21 @@ async function dossierInstanceInfo(token,baseURL,projectID,dossierID, dossierIns
             'X-MSTR-AuthToken': token,
             'X-MSTR-ProjectID': projectID
         }
-    } 
+    }
 
-    return fetch(baseURL+ "/api/dossiers/" + dossierID + "/instances/" + dossierInstanceID+ "?includeTOC=true&includeShortcutInfo=true&resultFlag=3&checkPrompted=true", options)
-    .then(function(response) {
-        if (response.ok) {
-            return response.json()
-        } else {
-            throw (new Error("Fetching Dossier List Error"));
-        }
-    })
+    return fetch(baseURL + "/api/dossiers/" + dossierID + "/instances/" + dossierInstanceID + "?includeTOC=true&includeShortcutInfo=true&resultFlag=3&checkPrompted=true", options)
+        .then(function(response) {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw (new Error("Fetching Dossier List Error"));
+            }
+        })
 }
 
 
 
-async function getBookmarks(token,baseURL,projectID,shortcutID){
+async function getBookmarks(token, baseURL, projectID, shortcutID) {
 
     var options = {
         method: 'GET',
@@ -341,24 +341,24 @@ async function getBookmarks(token,baseURL,projectID,shortcutID){
             'X-MSTR-AuthToken': token,
             'X-MSTR-ProjectID': projectID
         }
-    } 
+    }
 
-    return fetch(baseURL+ "/api/shortcuts/" + shortcutID+ "/bookmarks", options)
-    .then(function(response) {
-        if (response.ok) {
-            return response.json()
-        } else {
-            throw (new Error("Fetching Dossier List Error"));
-        }
-    })
+    return fetch(baseURL + "/api/shortcuts/" + shortcutID + "/bookmarks", options)
+        .then(function(response) {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw (new Error("Fetching Dossier List Error"));
+            }
+        })
 }
 
 
-async function createBookmark(token,baseURL,projectID,dossierInstanceID,bookmarkName){
+async function createBookmark(token, baseURL, projectID, dossierInstanceID, bookmarkName) {
 
     var raw = JSON.stringify({
-    "name": bookmarkName,
-    "instanceId": dossierInstanceID
+        "name": bookmarkName,
+        "instanceId": dossierInstanceID
     });
 
 
@@ -373,25 +373,25 @@ async function createBookmark(token,baseURL,projectID,dossierInstanceID,bookmark
             'X-MSTR-ProjectID': projectID
         },
         body: raw
-    } 
+    }
 
     return fetch(baseURL + "/api/bookmarks", options)
-    .then(function(response) {
-        if (response.ok) {
-            return response.json()
-        } else {
-            throw (new Error("Fetching Dossier List Error"));
-        }
-    })
+        .then(function(response) {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw (new Error("Fetching Dossier List Error"));
+            }
+        })
 }
 
 
 
 
-async function deleteBookmarkApi(token,baseURL,projectID,shortcutID,bookmarkID) {
+async function deleteBookmarkApi(token, baseURL, projectID, shortcutID, bookmarkID) {
 
     var raw = JSON.stringify({
-    "shortcutId": shortcutID
+        "shortcutId": shortcutID
     });
 
     var options = {
@@ -405,22 +405,22 @@ async function deleteBookmarkApi(token,baseURL,projectID,shortcutID,bookmarkID) 
             'X-MSTR-ProjectID': projectID
         },
         body: raw
-    } 
+    }
 
 
-    return fetch(baseURL+ "/api/bookmarks/" + bookmarkID, options)
-    .then(function(response) {
-        if (response.ok) {
-            return response
-        } else {
-            throw (new Error("Fetching Dossier List Error"));
-        }
-    })
+    return fetch(baseURL + "/api/bookmarks/" + bookmarkID, options)
+        .then(function(response) {
+            if (response.ok) {
+                return response
+            } else {
+                throw (new Error("Fetching Dossier List Error"));
+            }
+        })
 
 }
 
 
-async function getFavoritesAPI(token){
+async function getFavoritesAPI(token) {
     var options = {
         method: 'GET',
         credentials: 'include',
@@ -430,30 +430,28 @@ async function getFavoritesAPI(token){
             'Content-Type': 'application/json',
             'X-MSTR-AuthToken': token,
         }
-    } 
+    }
 
-    return fetch(baseURL+ "/api/library/shortcutGroups", options)
-    .then(function(response) {
-        if (response.ok) {
-            return response.json()
-        } else {
-            throw (new Error("Fetching Dossier List Error"));
-        }
-    })
+    return fetch(baseURL + "/api/library/shortcutGroups", options)
+        .then(function(response) {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw (new Error("Fetching Dossier List Error"));
+            }
+        })
 }
 
 
-async function addFavoriteAPI(token,dossierID,projectID){
+async function addFavoriteAPI(token, dossierID, projectID) {
     var raw = JSON.stringify({
-    "operationList": [
-        {
-        "op": "addElements",
-        "path": "/itemKeys",
-        "value": [
-            dossierID + "_" + projectID
-        ]
-        }
-    ]
+        "operationList": [{
+            "op": "addElements",
+            "path": "/itemKeys",
+            "value": [
+                dossierID + "_" + projectID
+            ]
+        }]
     });
 
     var options = {
@@ -465,51 +463,73 @@ async function addFavoriteAPI(token,dossierID,projectID){
             'Content-Type': 'application/json',
             'X-MSTR-AuthToken': token,
         },
-        body : raw
-    }     
-
-     fetch("https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/api/library/shortcutGroups/favorites", options)
-    .then(function(response) {
-        if (response.ok) {
-            console.log("Dossier Added to Homepage successfully!!!")
-        } else {
-            throw (new Error("Fetching Dossier List Error"));
-        }
-    })
-}
-
-
-async function removeFavoriteAPI(token,dossierID,projectID){
-    var raw = JSON.stringify({
-    "operationList": [
-        {
-        "op": "removeElements",
-        "path": "/itemKeys",
-        "value": [
-            dossierID + "_" + projectID
-        ]
-        }
-    ]
-    });
-
-    var options = {
-        method: 'PATCH',
-        credentials: 'include',
-        mode: 'cors',
-        redirect: 'follow',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-MSTR-AuthToken': token,
-        },
-        body : raw
-    }     
+        body: raw
+    }
 
     fetch("https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/api/library/shortcutGroups/favorites", options)
-    .then(function(response) {
-        if (response.ok) {
-            console.log("Dossier removed from Homepage successfully!!!")
-        } else {
-            throw (new Error("Fetching Dossier List Error"));
+        .then(function(response) {
+            if (response.ok) {
+                console.log("Dossier Added to Homepage successfully!!!")
+                location.reload(true);
+            } else {
+                throw (new Error("Fetching Dossier List Error"));
+            }
+        })
+}
+
+
+async function removeFavoriteAPI(token, dossierID, projectID) {
+    var raw = JSON.stringify({
+        "operationList": [{
+            "op": "removeElements",
+            "path": "/itemKeys",
+            "value": [
+                dossierID + "_" + projectID
+            ]
+        }]
+    });
+
+    var options = {
+        method: 'PATCH',
+        credentials: 'include',
+        mode: 'cors',
+        redirect: 'follow',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-MSTR-AuthToken': token,
+        },
+        body: raw
+    }
+
+    fetch("https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/api/library/shortcutGroups/favorites", options)
+        .then(function(response) {
+            if (response.ok) {
+                console.log("Dossier removed from Homepage successfully!!!")
+                location.reload(true);
+            } else {
+                throw (new Error("Fetching Dossier List Error"));
+            }
+        })
+}
+
+
+async function getContentGroupsChildUpdated(baseURL, token, groupid, projects) {
+    var options = {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-mstr-authtoken': token
         }
-    })
+    }
+
+    return fetch(baseURL + '/api/contentGroups/' + groupid + '/contents?projectId=' + projects, options)
+        .then(function(response) {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw (new Error("Get Library Error"));
+            }
+        })
 }
