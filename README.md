@@ -75,24 +75,3 @@ The following REST APIs are used in this project. For more information about Mic
    
      * **limit:** It is the max number of records to be returned. For example, if the limit is 500, it will return only 500 records of the report. The default value is 1000.
            
-   URL:
-   
-   ```http
-   https://demo.microstrategy.com/MicroStrategyLibrary/api/searches/results?name=report1&type=3&limit=10
-   ```
-   
-#### Login
-
-![alt text](./ScreenShot/Login.png)
-
-#### Embedded Dossier
-
-![alt text](./ScreenShot/Dossier.png)
-
-#### Search Report
-
-![alt text](./ScreenShot/Search%20Report.png)
-
-#### Embedded Report 
-
-![alt text](./ScreenShot/Report.png)
