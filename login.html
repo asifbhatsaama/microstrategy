@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <title>MicroStrategy POC</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/API.js"></script>
@@ -27,7 +28,8 @@
 </body>
 
 <script>
-var input = document.getElementById("password");
+    // Trigger main function after pressing Enter key
+    var input = document.getElementById("password");
     input.addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
             event.preventDefault();
@@ -54,10 +56,6 @@ var input = document.getElementById("password");
             })
 
     }
-
-
 </script>
-
-
 
 </html>

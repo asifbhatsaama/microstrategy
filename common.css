@@ -1,9 +1,6 @@
-/* Show Filters horizontally */
-
 .headerContainer {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     height: 50px;
     width: 100%;
     background-color: darkblue;
@@ -103,33 +100,7 @@
 }
 
 .panel {
-    /* height: 40px; */
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-    /* background-color: darkblue;
-    color: #fff;
-    border-radius: 0.25rem;
-    border-color: #0d6efd; */
     display: none;
-}
-
-.vizlist {
-    /* height: 40px; */
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: darkblue;
-    color: #fff;
-    border-radius: 0.25rem;
-    border-color: #0d6efd; */
-    /* margin-top: 10px; */
-}
-
-.projectList {
-    /* height: 40px; */
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: darkblue;
-    color: #fff;
-    border-radius: 0.25rem;
-    border-color: #0d6efd; */
-    /* margin-top: 10px; */
 }
 
 .filterControlLink {
@@ -149,132 +120,12 @@
     height: 50px;
     min-width: fit-content;
     border: 0px;
-    /* font-weight: bold; */
-    /* background-color: aqua; */
 }
 
 .tab-btn {
     display: flex;
     justify-content: flex-end;
     font-size: small;
-}
-
-
-/* Show Filters Vertically */
-
-
-/* .headerContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    width: 100%;
-    background-color: blue;
-    color: white;
-} */
-
-.mainContainerhrz {
-    display: flex;
-    width: 100%;
-}
-
-.filterContainerhrz {
-    width: 20%;
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid #ccc;
-}
-
-.filterHeaderhrz {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    background-color: beige;
-    font-weight: bold;
-    font-size: 25px;
-    color: blue;
-}
-
-.filterListContainerhrz {
-    margin-top: 10px;
-}
-
-#embedding-dossier-containerhrz {
-    width: 80%;
-}
-
-.filterControl input.hrz {
-    margin: 2px;
-    padding: 2px 2px;
-    background-color: #38859f;
-    color: white;
-    font-weight: bold;
-    font-size: medium;
-}
-
-.filterControlListhrz {
-    display: flex;
-    justify-content: center;
-}
-
-.filterRowHeaderhrz {
-    display: flex;
-    justify-content: space-between;
-}
-
-.filterListRowhrz {
-    padding: 10px 10px;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.filterNamehrz {
-    font-size: medium;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.rowFilterControlhrz {
-    display: flex;
-    gap: 5px;
-}
-
-.selectandclearbuttonshrz {
-    display: flex;
-    flex-direction: column;
-}
-
-.basic-button.hrz {
-    border-radius: 7px;
-    height: 50px;
-    width: 150px;
-}
-
-.filterControlLinkshrz {
-    /* margin: 10px;
-    padding: 10px; */
-    display: flex;
-    margin-top: -5px;
-    margin-left: 10px;
-    /* margin-left: -20px; */
-    margin: 5px;
-}
-
-.filterControlhrz {
-    display: flex;
-}
-
-.btn.hrz {
-    width: 150px;
-    height: 50px;
-    margin-top: 15px;
-}
-
-.filterswitch-btn.hrz {
-    position: relative;
-    left: 35.5%;
 }
 
 h3 {
@@ -289,4 +140,60 @@ h3 {
 
 .btn-link {
     text-decoration: none
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+input[type=text],
+select,
+textarea {
+    width: 90%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.task-container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 400px;
+}
+
+.formPopup {
+    display: none;
+    position: fixed;
+    left: 81%;
+    top: 5.8%;
+    border: 3px solid #999999;
+    z-index: 9;
+}
+
+.formContainer {
+    max-width: 300px;
+    padding: 20px;
+    background-color: #fff;
 }

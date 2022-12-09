@@ -1,14 +1,8 @@
-/* .navbar{
-    margin-bottom: 10px;
-} */
-
 .nav-item {
-    /* font-size: 20pt; */
     font-size: 1.1vw;
 }
 
 .navbar-brand {
-    /* font-size: 30pt; */
     font-size: 2vw;
     color: white;
 }

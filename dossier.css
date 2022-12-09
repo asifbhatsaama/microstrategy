@@ -8,14 +8,12 @@
     margin: 0px 2px 1px 2px;
     border: none;
     background-color: white;
-    /* color: blue; */
 }
 
 .dash-lib {
     margin: 0px 2px 1px 2px;
     border: none;
     background-color: white;
-    /* color: blue; */
 }
 
 .fav-dash {
@@ -28,7 +26,6 @@
     margin: 0px 2px 1px 2px;
     border: none;
     background-color: white;
-    /* color: blue; */
 }
 
 button:hover,
@@ -37,10 +34,6 @@ button:focus {
 }
 
 .library-list {
-    display: none;
-}
-
-.config-list {
     display: none;
 }
 
@@ -67,4 +60,74 @@ button:focus {
     height: 30px;
     margin-right: 5px;
     border-radius: 6px;
+}
+
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+ul.tab li {
+    float: left;
+}
+
+ul.tab li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+ul.tab li a:hover {
+    background-color: #ddd;
+}
+
+.active {
+    background-color: #ccc;
+}
+
+.activedash {
+    background-color: #e8f5ff;
+    border-bottom: 4px solid #1D96DD;
+}
+
+@-webkit-keyframes fadeEffect {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeEffect {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.nav-btn {
+    cursor: pointer;
+    border: none;
+    height: 47px;
+    width: 150px;
+}
+
+.filterIcon {
+    display: none;
+}
+
+.filterpanelFilterIcon {
+    height: 40px;
+    width: 40px;
+    margin-left: -8px;
+    margin-top: -17px;
 }

@@ -1,88 +1,30 @@
 <html>
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>MicroStrategy POC</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="./chosen.min.css">
+    <link rel="stylesheet" href="./common.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/main.js"></script>
     <script src="js/API.js"></script>
     <script src="https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
     <link rel="stylesheet" href="./dossier.css">
-    <link rel="stylesheet" href="./chosen.min.css">
-    <!-- <script src="./index.js"></script> -->
-    <style>
-        ul.tab {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            background-color: #f1f1f1;
-        }
-        /* Float the list items side by side */
-        
-        ul.tab li {
-            float: left;
-        }
-        /* Style the links inside the list items */
-        
-        ul.tab li a {
-            display: inline-block;
-            color: black;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            transition: 0.3s;
-            font-size: 17px;
-        }
-        /* Change background color of links on hover */
-        
-        ul.tab li a:hover {
-            background-color: #ddd;
-        }
-        /* Create an active/current tablink class */
-        /* ul.tab li a:focus, */
-        
-        .active {
-            background-color: #ccc;
-        }
-        
-        .activedash {
-            background-color: #e8f5ff;
-            border-bottom: 4px solid #1D96DD;
-        }
-        /* .opendash {
-            background-color: green;
-            border-bottom: 4px solid #1D96DD;
-        } */
-        
-        @-webkit-keyframes fadeEffect {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes fadeEffect {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-    </style>
-
 
 </head>
 
 <body onload="activeFavourite()">
 
+    <!-- Top Nav Bar -->
     <nav class="navbar navbar-dark bg-primary">
         <h1 style="color:white;">KPI Studio (MicroStrategy) Dashboard Library</h1>
+
+        <!-- Content Group Dropdown -->
         <h6>Focus</h6>
         <select class="focus" id="focus" style="margin-right: 10px;width: 150px;" data-placeholder="Focus" onchange="populateAnalytics(this);"></select>
+        
+        <!-- Content Group Child Items Dropdown with respect to specific content group -->
         <h6>Analytics</h6>
         <select class="analytics" id="analytics" style="margin-right: 10px;width: 150px;" data-placeholder="Analytics" onchange="selectChanged(this);"></select>
         <ul class="navbar-nav">
@@ -90,31 +32,41 @@
         </ul>
         <div class="navbar-text" id="usermessage"></div>
         <div class="" id="logoutButton" onclick=""></div>
+
+        <!-- Top Nav bar Show filter Icon -->
+        <button class="homepage-filter-show-hide filterIcon" onclick="hideshowFilters()" style="height: 40px; width:40px; border-radius: 50%;"><i class="fa fa-filter"></i></button>
     </nav>
 
-
-
+    <!-- Favourite & List of Libraries Container -->
     <ul class="tab" style="display: flex; flex-direction: row; justify-content: space-between">
         <div>
-            <li><a href="#" class="home-btn" onclick="">Home</a></li>
-            <li><a href="#" class="dash-lib" onclick="">Dashboard Library</a></li>
+            <!-- Home Container Tab -->
+            <li><button href="#" class="home-btn nav-btn" onclick="">Home</button></li>
+
+            <!-- Dashboard Library Tab -->
+            <li><button href="#" class="dash-lib nav-btn" onclick="">Dashboard Library</button></li>
         </div>
 
+        <!-- Add and Remove Favourite -->
         <div class="config-drop-appy">
             <h5>Configure :</h5>
 
+            <!-- List of Libraries dropdown -->
             <select class="chosen" id="libraryDropdown" style="width: 200px;" onchange="dossierDetails(this)"></select>
+
+            <!-- Add to favourite button -->
             <button type="button" class="btn btn-secondary btn-sm createfavouritebtn" onclick="addFavorite(this)">Create</button>
+
+            <!-- Remove from favourite button -->
             <button type="button" class="btn btn-secondary btn-sm removefavouritebtn" onclick="removeFavorite(this)">Remove</button>
 
         </div>
-
-
     </ul>
 
-    <ul class="tab dashboard-tabs" style="display: flex; flex-direction: row;" onload="test()"></ul>
+    <!-- Load first dossier onload method -->
+    <ul class="tab dashboard-tabs" style="display: flex; flex-direction: row;" onload="loadfirstDossier()"></ul>
 
-
+    <!-- List of Library Contents Container -->
     <div class="library-list tabcontent">
         <div id="library">
             <table class="table table-striped" id="dossierTable">
@@ -130,50 +82,37 @@
         </div>
     </div>
 
-    <div class="config-list tabcontent">
-        <div>Config Items Here</div>
+    <!--Dossier & Filter Container -->
+    <div class="filter-dossier-container" style="display: flex; flex-direction:row">
+        <div id="filterContainer" class="filterContainer basic-container" style="display: none; flex-direction: column; justify-content: flex-start; width: 300px; padding-left: 7px; margin-left: 5px; border: 1px solid gainsboro;" onload="runCode()">
+
+            <div class="filterSection">
+                <div class="filterListContainer example-container" style="display: block"></div>
+            </div>
+            <div class="filterControlSection">
+                <div class="filterControl" style="display: flex;">
+
+                    <button type="button" class="btn btn-primary" onclick="applyFilter(attributeSelector)">Apply</button>
+
+                    <div class="filterlinks" style="margin-top: -5px; margin-left: 10px">
+                        <a href="#" class="filterControlLinks" id="attributeSelectorValuesSelectAllAndSubmit" onclick="selectAllAndSubmit()"><i class="fa-solid fa-check fa-2x"></i></a>
+                        <a href="#" class="filterControlLinks" id="attributeSelectorValuesDeselectAllAndSubmit" onclick="deselectAllAndSubmit()"><i class="fa fa-remove fa-2x clearall-btn"></i></a>
+                        <button class="homepage-filter-show-hide filterpanelFilter-btn" onclick="hideshowfilterIcon()" style="background-color: rgba(0, 0, 0, 0);border: none;"><img class="filterpanelFilterIcon" src="./hidefilterIcon.jpg"></img></button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div id="embedding-dossier-container"></div>
     </div>
+
     <script src="./chosen.jquery.min.js"></script>
-    <div id="embedding-dossier-container"></div>
+    <script src="./index.js"></script>
+    <script src="./js/main.js"></script>
+
 </body>
-
-<script>
-    startLibrary();
-
-   async function activeFavourite() {
-        document.querySelector(".home-btn").classList.remove("active")
-        document.querySelector(".dash-lib").classList.add("active")
-        getFavorites()
-        const baseURL = sessionStorage.getItem("baseURL");
-        const token = sessionStorage.getItem("token");
-        const proj = await getProjects(baseURL, token).then((projects) => projects)
-        let arr = new Array()
-        for (let i in proj.projects){
-         arr.push(proj.projects[i].id)
-        }
-        projects = arr.join('&projectId=')
-        sessionStorage.setItem("projects",projects)
-    }
-
-
-    $(".home-btn").click(function() {
-        $(".library-list").hide();
-        $(".config-list").hide();
-        $(".favourite-list").show();
-        document.querySelector(".dash-lib").classList.add("active");
-        document.querySelector(".home-btn").classList.remove("active");
-        $(".dashboard-tabs").show()
-    })
-
-    $(".dash-lib").click(function() {
-        $(".favourite-list").hide();
-        $(".config-list").hide();
-        $(".library-list").show();
-        document.querySelector(".home-btn").classList.add("active");
-        document.querySelector(".dash-lib").classList.remove("active");
-        $(".dashboard-tabs").hide()
-
-    })
-</script>
 
 </html>

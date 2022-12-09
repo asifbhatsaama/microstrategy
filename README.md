@@ -59,3 +59,40 @@ The following REST APIs are used in this project. For more information about Mic
     ```http
     GET /api/library
     ```
+
+5. [Get Quick Search result in a list](https://demo.microstrategy.com/MicroStrategyLibrary/api-docs/index.html?#/Browsing/doQuickSearch)
+
+    Use the stored results of the Quick Search engine to return search results and display them as a list.
+    
+    ```http
+    GET /api/searches/results
+    ```
+   #### Query parameters
+           
+     * **type:** It is the type of objects to be searched, for example, 3 for report. Possible values are defined in [EnumDSSObjectType](https://lw.microstrategy.com/msdz/msdl/GARelease_Current/docs/ReferenceFiles/reference/com/microstrategy/webapi/EnumDSSXMLObjectTypes.html)
+           
+     * **offset:** It is the start point of your response. For example, if offset=2, it will return the report data beginning with the second record. The default value is 0.
+   
+     * **limit:** It is the max number of records to be returned. For example, if the limit is 500, it will return only 500 records of the report. The default value is 1000.
+           
+   URL:
+   
+   ```http
+   https://demo.microstrategy.com/MicroStrategyLibrary/api/searches/results?name=report1&type=3&limit=10
+   ```
+   
+#### Login
+
+![alt text](./ScreenShot/Login.png)
+
+#### Embedded Dossier
+
+![alt text](./ScreenShot/Dossier.png)
+
+#### Search Report
+
+![alt text](./ScreenShot/Search%20Report.png)
+
+#### Embedded Report 
+
+![alt text](./ScreenShot/Report.png)

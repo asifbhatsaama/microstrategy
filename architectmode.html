@@ -1,0 +1,56 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroStrategy POC</title>
+    <link rel="stylesheet" href="./architectmode.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./js/API.js"></script>
+    <!-- <script src="./js/main.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body onload="activeSchemas()">
+    <div class="top-nav">
+        <button class="humbergerIcon" onclick="gotoDashboard()" style="background-color: darkblue;"><i class="fa fa-bars" style="font-size:24px"></i></button>
+
+        <h3>MicroStrategy POC</h3>
+        
+    </div>
+    <ul class="tab" style="display: flex; flex-direction: row; justify-content: space-between">
+        <div>
+            <li><button class="schemas-btn nav-btn">Schemas</button></li>
+            <li><button class="users-lib nav-btn">Users</button></li>
+            <li><button class="sharekpis-lib nav-btn">Share KPIs</button></li>
+        </div>
+    </ul>
+
+    <div>
+        <div class="schemas">Schemas</div>
+        <div class="users">Users</div>
+        <div class="sharekpis-container">
+            <div class="team-head-sharekpis">
+                <h4 class="team-head">Select a team to edit sharing:</h4>
+                <div class="teamcontainer"></div>
+            </div>
+
+            <div class="content-folder-subfolder-and-btn-container">
+                <div class="selectedgroupinfo"></div>
+                <div style="border: 0.1rem solid #e5e5e5;padding: 1rem; margin-bottom: 1rem;">
+                    <div class="content-folder-subfoler-container"></div>
+                    <div class="edit-buttons">
+                        <button class="button update" onclick="getChecked()">Update</button>
+                        <button class="button cancel" onclick="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./architectmode.js"></script>
+</body>
+
+</html>

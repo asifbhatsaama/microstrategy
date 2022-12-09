@@ -2,24 +2,6 @@
     font-weight: bold;
 }
 
-
-/* .migrationlistdropbtn {
-    height: 40px;
-    width: 40px;
-    border-radius: 50px;
-    margin-top: 5;
-} */
-
-
-/* .dropdown-content-ml {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-} */
-
 .bookmarklistdropbtn {
     height: 40px;
     width: 40px;
@@ -38,23 +20,11 @@
     padding-bottom: 10px;
 }
 
-
-/* .createBookmarkListDropdown {
-    height: 40px;
-    width: 40px;
-    border-radius: 50px;
-    margin-top: 5;
-} */
-
 .dropdown-content-create-bm {
     display: none;
-    /* position: absolute; */
     background-color: #f1f1f1;
     overflow: auto;
-    /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
     z-index: 1;
-    /*  */
-    /* display: block; */
     margin-left: -15px;
     border: solid #0e6ff9 2px;
     border-radius: 5px;
@@ -76,6 +46,13 @@
 }
 
 .userdropbtn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-top: 2;
+}
+
+.dossiertype-dropbtn {
     height: 40px;
     width: 40px;
     border-radius: 50px;
@@ -131,12 +108,6 @@
     margin-top: 2;
 }
 
-
-/* .userdropbtn:hover,
-.userdropbtn:focus {
-    background-color: #2980B9;
-} */
-
 .exportdropbtn {
     height: 50px;
     width: 50px;
@@ -144,16 +115,15 @@
     margin-left: 510;
 }
 
-
-/* .exportdropbtn:hover,
-.exportdropbtn:focus {
-    background-color: #2980B9;
-} */
-
 .userDropdown {
     position: relative;
     display: inline-block;
     margin-left: -18
+}
+
+.dossier-type {
+    position: relative;
+    display: inline-block;
 }
 
 .exportDropdown {
@@ -164,9 +134,6 @@
 .dropdown-content {
     display: none;
     position: absolute;
-    /* background-color: #f1f1f1; */
-    /* overflow: auto; */
-    /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
     z-index: 1;
 }
 
@@ -180,9 +147,6 @@
 .dropdown-content-pl {
     display: none;
     position: absolute;
-    /* background-color: #f1f1f1; */
-    /* overflow: auto; */
-    /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
     z-index: 1;
 }
 
@@ -196,9 +160,6 @@
 .dropdown-content-panellist {
     display: none;
     position: absolute;
-    /* background-color: #f1f1f1; */
-    /* overflow: auto; */
-    /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
     z-index: 1;
 }
 
@@ -210,12 +171,22 @@
 }
 
 .dropdown-content-usericon {
-    display: none;
+    /* display: none;
     position: absolute;
     background-color: #f1f1f1;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1; */
+    display: none;
     z-index: 1;
+    background: #fff;
+    border: 0.1rem solid rgba(85, 96, 110, 0.4);
+    border-radius: 0.5rem;
+    /* margin-top: 1rem; */
+    overflow: auto;
+    position: absolute;
+    top: 100%;
+    right: 0px;
 }
 
 .dropdown-content-usericon a {
@@ -225,7 +196,26 @@
     display: block;
 }
 
+.dropdown-content-dossiertypeicon {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content-dossiertypeicon a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
 .userDropdown a:hover {
+    background-color: #ddd;
+}
+
+.dossier-type a:hover {
     background-color: #ddd;
 }
 
@@ -259,7 +249,6 @@
     top: 0;
     margin-left: .1rem;
     margin-right: .1rem;
-    /* left: -203%; */
     left: -161px;
 }
 
@@ -274,8 +263,15 @@
 }
 
 .username {
-    padding-bottom: 2px;
-    border-bottom: 2px solid darkblue;
+    /* padding-bottom: 2px;
+    border-bottom: 2px solid darkblue; */
+    border-bottom: 1px solid #ccc;
+    display: block;
+    line-height: 18px;
+    padding: 12px 0 11px 12px;
+    white-space: normal;
+    font-weight: bold;
+    color: #333333;
 }
 
 input[type="search"]::placeholder {
@@ -286,41 +282,25 @@ input[type="search"]::placeholder {
     margin-left: 270px;
 }
 
-
-/* .daliaContainer {
-    margin-top: 9px
-} */
-
 #daliaDossierList_chosen {
     color: black;
 }
 
-
-/* #daliaDossierList {} */
-
 .createBookmark-Icon {
-    /* height: 2px;
-    width: 2px; */
     border: none;
     margin-left: 160px;
     margin-top: 2px;
 }
 
 .shareBookmark-Icon {
-    /* height: 2px;
-    width: 2px; */
     border: none;
 }
 
 .editBookmark-Icon {
-    /* height: 2px;
-    width: 2px; */
     border: none;
 }
 
 .deleteBookmark-Icon {
-    /* height: 2px;
-    width: 2px; */
     border: none;
 }
 
@@ -328,17 +308,6 @@ input[type="search"]::placeholder {
     margin-left: 65px;
     margin-top: 5px;
 }
-
-
-/* .dropdown-submenu {
-    position: relative;
-}
-
-.dropdown-submenu .dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -1px;
-} */
 
 .bookmark-name {
     margin-bottom: 5px;
@@ -389,6 +358,12 @@ input[type="search"]::placeholder {
     color: black;
 }
 
+#projectList1_chosen {
+    width: 200px;
+    color: black;
+    padding-bottom: 5px;
+}
+
 #panellist_chosen {
     width: 200px;
     color: black;
@@ -398,19 +373,108 @@ input[type="search"]::placeholder {
     display: none;
 }
 
-
 .dalia {
     border-radius: 8px;
     margin-bottom: 2px;
     width: 120px;
 }
 
-
 .msfContainer {
     margin-left: 270px;
-    }
+}
 
-    .msfapply-btn {
-        margin-right: 50px;
-        border-radius: 5px;
-    }
+.msfapply-btn {
+    margin-right: 50px;
+    border-radius: 5px;
+}
+
+.tabgraph-btn {
+    display: none;
+}
+
+.create-dossier-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-left: -17px;
+    margin-right: -17px;
+    margin-top: -5px;
+}
+
+#projectList_chosen {
+    width: 200px;
+    display: none;
+}
+
+#projectList1_chosen {
+    width: 200px;
+    display: none;
+}
+
+.dropdown-menu .dropdown-menu {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.dropdown-menu li {
+    position: relative;
+}
+
+.nav-item-gt .submenu-gt {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+}
+
+.nav-item-gt .submenu-left {
+    right: 100%;
+    left: auto;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+
+/* .dropdown-menu>li:hover>.submenu-gt {
+    display: block;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+} */
+
+.dropdown-menu>li:hover>#projectList_chosen {
+    display: none;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.dropdown-menu>li:hover>#projectList1_chosen {
+    display: none;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.userIcondropdownbtn {
+    margin-top: 2px;
+    padding-top: 0;
+    padding-bottom: 5px;
+    color: #333333;
+}
+
+.userprofiledropbtn {
+    padding-left: 6px;
+    min-height: 33px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    text-align: left;
+    width: 200px;
+    margin-left: 5px;
+    font-weight: 600;
+}
+
+.userprofiledropbtn:hover {
+    background-color: #E0E0E0;
+}
+
+.extremeRight {
+    margin-top: 5px;
+}

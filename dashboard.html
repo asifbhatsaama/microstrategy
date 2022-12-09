@@ -1,12 +1,13 @@
 <html lang="en">
 
 <head>
+    <title>MicroStrategy POC</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://env-292687.trial.cloud.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
     <link rel="stylesheet" href="./chosen.min.css">
     <link rel="stylesheet" href="./common.css">
     <link rel="stylesheet" href="./navbaricon.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <script src="./js/API.js"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -15,103 +16,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
-
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        
-        * {
-            box-sizing: border-box;
-        }
-        
-        input[type=text],
-        select,
-        textarea {
-            width: 90%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-top: 6px;
-            margin-bottom: 16px;
-            resize: vertical;
-        }
-        
-        input[type=submit] {
-            background-color: #04AA6D;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
-        
-        .task-container {
-            border-radius: 5px;
-            background-color: #f2f2f2;
-            padding: 20px;
-            width: 400px;
-        }
-        
-        .formPopup {
-            display: none;
-            position: fixed;
-            left: 81%;
-            top: 5.8%;
-            border: 3px solid #999999;
-            z-index: 9;
-        }
-        
-        .formContainer {
-            max-width: 300px;
-            padding: 20px;
-            background-color: #fff;
-        }
-
-
-
-    </style>
-
 
 </head>
 
 <body onload="dosparam();">
+    <!-- Top Nav Bar -->
     <div class="headerContainer">
         <div style="flex-direction: row;display: flex;justify-content: center;">
-            <h3 style="text-align: center;margin-top: 10px; position: relative">MicroStrategy POC</h3>
+            <h3 style="text-align: center; position: relative">MicroStrategy POC</h3>
         </div>
-        <!-- <div style="display: flex; flex-direction: row;"> -->
 
-            <!-- <div class="daliaContainer">
-                <select class="chosen" id="daliaDossierList" onchange="daliaDossier(this)" style="width:200px;" data-placeholder="Ask DaLIA"></select>
-            </div>
-        </div> -->
-
+        <!-- MSF Container -->
         <div style="display: flex; flex-direction: row;">
             <div class="msfContainer" style="display:flex; flex-direction: row;">
                 <div class="msf" id="msf">
-                    <select multiple class="chosen" id="masterstudyFilter" style="width:200px;"></select>
+                    <select multiple class="chosen" id="masterstudyFilter" style="width:350px;"></select>
                     <button class="msfapply-btn" onclick="applyMSF()">Apply</button>
                 </div>
             </div>
 
+            <!-- Dalia Container -->
             <div class="daliaContainer">
                 <select class="chosen" id="daliaDossierList" onchange="daliaDossier(this)" style="width:200px;" data-placeholder="Ask DaLIA"></select>
             </div>
@@ -119,6 +51,7 @@
 
         <div class="extremeRight" style="display: flex;">
 
+            <!-- Bookmark Container -->
             <div class="bookmarkListDropdown" onclick="listUserStories()">
                 <button class="bookmarklistdropbtn filterswitchhorizontally" onclick="openbmtab()"><i class='far fa-bookmark' style='font-size:24px'></i>
                 </button>
@@ -137,61 +70,82 @@
 
                         </div>
                     </div>
-
-
                     <div class="filterStoryList" style="margin-left: -120px;">
-
                     </div>
-
                 </ul>
-
-
             </div>
 
+            <!-- Hide Show Filters Icon -->
             <button class="hideshowfilters" onclick="hideshowfilters()"><i class="fa fa-filter"></i></button>
 
+            <!-- Task Icon -->
             <button class="taskIcon" onclick="listUserStories()"><i class="fas fa-tasks"></i></button>
 
-
+            <!-- Maximize widget Icon and Dropdown -->
             <div class="maximizeIcon">
                 <button class="maximizelistdropbtn filterswitchhorizontally"><i class='fas fa-expand-alt' style='font-size:24px'></i>
                 </button>
                 <div id="maximizeIcon" class="dropdown-content" style="margin-left: -120px;">
                     <select id="vizList" class="chosen vizList filterswitchhorizontally" onchange="resizeWidget('maximized')" style="width: 200px; "></select>
-                    <!-- vertical-align: inherit; font-size: revert; size:"15" -->
                 </div>
             </div>
 
+            <!-- Minimize Icon -->
             <button class="minimizeIcon" onclick="resizeWidget('normal')"><i class='fas fa-compress-alt' style='font-size:24px'></i></button>
 
-            <div class="projectListDropdown">
-                <button class="projectlistdropbtn filterswitchhorizontally"><i class="material-icons">add</i>
+            <!-- Create Tabular and Graphical Report Icon and Dossier Template list Dropdown -->
+            <nav class="navbar navbar-expand-lg navbar-dark ">
                 </button>
-                <div id="projectListDropdown" class="dropdown-content-pl" style="margin-left: -120px;">
-                    <select id="projectList" class="chosen projectList filterswitchhorizontally" onchange="createDossier(this)" style="width: 200;"></select>
-                    <!--  vertical-align: inherit; font-size: revert -->
-                </div>
-            </div>
-            <!-- btn btn-primary filterswitchhorizontally -->
-            <!-- background-color:darkblue; vertical-align: inherit; height: 35px -->
-            <button class="authoringIcon" onclick="authoring()"><i class='fas fa-pen' style='font-size:24px'></i></button>
+                <div class="collapse navbar-collapse" id="main_nav">
 
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item-gt dropdown-gt">
+                            <button class="create-dossier-icon  dropdown-toggle01" href="#" data-toggle="dropdown"><i class="fa fa-plus" style="font-size:24px"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+
+                                <!-- Create Tabular Dossier Dropdown -->
+                                <li><a class="tabular dropdown-item dropdown-toggle" href="#"> Tabular Analytics </a>
+                                    <ul class="submenu-gt submenu-left dropdown-menu">
+                                        <select id="projectList" class="dropdown-item chosen projectList filterswitchhorizontally" onchange="createDossier(this,'table')" style="width: 200;"></select>
+                                    </ul>
+                                </li>
+
+                                <!-- Create Graphical Dossier Dropdown -->
+                                <li><a class="graphical dropdown-item dropdown-toggle" href="#"> Graphical Analytics </a>
+                                    <ul class="submenu-gt submenu-left dropdown-menu">
+                                        <select id="projectList1" class="dropdown-item chosen projectList1 filterswitchhorizontally" onchange="createDossier(this,'graph')" style="width: 200;"></select>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </nav>
+
+            <!-- Edit Dossier Icon -->
+            <button class="authoringIcon" onclick="edit()"><i class='fas fa-pen' style='font-size:24px'></i></button>
+
+            <!-- Panel List Icon & Dropdown -->
             <div class="panelListDropdown">
                 <button class="panellistdropbtn filterswitchhorizontally"><i class='fas fa-th-list' style='font-size:24px'></i>
                 </button>
                 <div id="panelListDropdown" class="dropdown-content-panellist" style="margin-left: -140px;">
                     <select id="panellist" class="chosen panel" style="width: 200px; display: none;" onchange="selectChanged(this);"></select>
-                    <!--  margin-right: -30px; vertical-align: inherit; -->
+
                     <div id="panelStacksPanel"></div>
                 </div>
             </div>
 
+            <!-- Export Dossier in PDF & Excel Format -->
             <nav class="navbar navbar-expand-lg " style="background-color: darkblue;padding-bottom: 15px;height: 20px;display: contents;margin-left: 50px;">
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <button class="nav-link dropdown-toggle1" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="
-                        height: 40px; width: 40px; border-radius: 50px;margin-top: 2;">
+                        height: 40px; width: 40px; border-radius: 50px;margin-top: -7;">
               <i class='fas fa-file-export' style='font-size:24px; color:black'></i>
             </button>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="min-width:100px; margin: 0px -30px 0px">
@@ -199,18 +153,15 @@
                                 <li class="dropdown-submenu">
                                     <button class="dropdown-item dropdown-toggle">PDF</button>
                                     <ul class="dropdown-menu">
-                                        <li><button class="dropdown-item" onclick="exportPDFExcel('pdf','ALL')">Whole Dossier</button></li>
-                                        <li><button class="dropdown-item" onclick="exportPDFExcel('pdf','SINGLE')">Current Page</button></li>
-                                        <!-- <li><button class="dropdown-item" onclick="">Specific Visualization</button></li> -->
+                                        <li><button class="dropdown-item" onclick="exportDossier('pdf','ALL')">Whole Dossier</button></li>
+                                        <li><button class="dropdown-item" onclick="exportDossier('pdf','SINGLE')">Current Page</button></li>
                                     </ul>
                                 </li>
 
                                 <li class="dropdown-submenu">
                                     <button class="dropdown-item dropdown-toggle">Excel</button>
                                     <ul class="dropdown-menu">
-                                        <li><button class="dropdown-item" onclick="exportPDFExcel('excel','ALL')">Whole Dossier</button></li>
-                                        <!-- <li><button class="dropdown-item" onclick="exportPDFExcel('excel','SINGLE')">Current Page</button></li> -->
-                                        <!-- <li><button class="dropdown-item" onclick="">Specific Visualization</button></li> -->
+                                        <li><button class="dropdown-item" onclick="exportDossier('excel','ALL')">Whole Dossier</button></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -219,25 +170,30 @@
                 </div>
             </nav>
 
+            <!-- User Profile options -->
             <div class="userDropdown">
                 <button class="userdropbtn filterswitchhorizontally"><i class="fa fa-user" aria-hidden="true"></i>
                 </button>
-                <div id="userDropdown" class="dropdown-content-usericon" style="margin-left: -105px;">
+                <div id="userDropdown" class="dropdown-content-usericon" style="margin-left: -150px;">
                     <div class="username">
-                        <div id="username" style="background-color: darkblue; font-size: 11px;"></div>
+                        <!-- <div style="margin-left: 75px;"><i class='fas fa-user-circle' style='font-size:36px; color:black'></i></div> -->
+                        <div id="username"></div>
                     </div>
 
-                    <button class="btn btn-primary filterswitchhorizontally" onclick="fullscreen()" style="background-color:darkblue; vertical-align: inherit;width: 106px; height: 35px">Full Screen</button>
-                    <!-- <button class="btn btn-primary filterswitchhorizontally" onclick="authoring()" style="background-color:darkblue; vertical-align: inherit; height: 35px">Edit</button> -->
-                    <button class="btn btn-primary filterswitchhorizontally" onclick="userSync()" style="background-color:darkblue; vertical-align: inherit; height: 35px">UserSync</button>
-                    <button class="btn btn-primary filterswitchhorizontally" onclick="userLogout()" style="background-color:darkblue; vertical-align: inherit; height: 35px">Log Out</button>
-
+                    <div class="userIcondropdownbtn">
+                        <button class="filterswitchhorizontally userprofiledropbtn" onclick="fullscreen()">Full Screen</button>
+                        <button class="filterswitchhorizontally userprofiledropbtn" onclick="userSync()">UserSync</button>
+                        <button class="filterswitchhorizontally userprofiledropbtn" onclick="enterarchitectMode()">Enter Architect Mode</button>
+                        <button class="filterswitchhorizontally userprofiledropbtn" >Audit Trail Reports</button>
+                        <button class="filterswitchhorizontally userprofiledropbtn" onclick="userLogout()">Log Out</button>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 
+    <!-- Dossier Pages container -->
     <div class="tab-btn">
         <button class="basic-button btn-basic  subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[0].getFirstPage())">First Page</button>
         <button class="basic-button btn-basic subtab" onclick="dossier.goToNextPage();">Next Page</button>
@@ -246,8 +202,10 @@
         <button class="basic-button btn-basic  subtab" onclick="dossier.navigateToPage(dossier.getChapterList()[dossier.getChapterList().length - 1].getLastPage());">Last Page</button>
     </div>
 
+    <!-- Filter & Dossier Container -->
     <div class="mainContainer">
 
+        <!-- Filter Container -->
         <div id="filterContainer" class="filterContainer basic-container">
 
             <div class="filterSection">
@@ -255,22 +213,19 @@
             </div>
             <div class="filterControlSection">
                 <div class="filterControl">
-
+                    <button type="button" class="btn btn-primary" onclick="clearFilterExcludeMSF()">Clear</button>
                     <button type="button" class="btn btn-primary" onclick="applyFilter(attributeSelector)">Apply</button>
 
-                    <div class="filterlinks">
+                    <!-- <div class="filterlinks">
                         <a href="#" class="filterControlLinks" id="attributeSelectorValuesSelectAllAndSubmit" onclick="selectAllAndSubmit()"><i class="fa-solid fa-check fa-2x"></i></a>
                         <a href="#" class="filterControlLinks" id="attributeSelectorValuesDeselectAllAndSubmit" onclick="deselectAllAndSubmit()"><i class="fa fa-remove fa-2x clearall-btn"></i></a>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
         </div>
 
-
-
-
-
+        <!-- Task Form -->
         <div class="formPopup" id="popupForm">
             <form class="formContainer">
 
@@ -319,81 +274,14 @@
                 <input type="submit" value="Submit">
             </form>
         </div>
-        <!-- </div> -->
 
-
-
+        <!-- Dossier Container -->
         <div id="embedding-dossier-container"></div>
 
     </div>
 
-    <script type="text/javascript">
-        $("#daliaDossierList").chosen();
-        async function getLibrary() {
-            var options = {
-                method: 'GET',
-                credentials: 'include',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-mstr-authtoken': sessionStorage.getItem('token')
-                }
-            }
-            let baseURL = sessionStorage.getItem('baseURL');
-            return fetch(baseURL + '/api/library', options)
-                .then(function(response) {
-                    if (response.ok) {
-                        return response.json()
-                    } else {
-                        throw (new Error("Get Library Error"));
-                    }
-                })
-        }
-
-        getLibrary().then((library) => {
-            // debugger
-            console.log(library);
-            // debugger
-            // var daliaList = $(".chosen");
-            var daliaData = "";
-            var daliaDossierList = "";
-            $("#daliaDossierList").append($('<option></option>'));
-
-            for (let i = 0; i < library.length; i++) {
-                const dashboardId = library[i].target.id
-                const projectId = library[i].projectId;
-                const dashboardName = library[i].name;
-                console.log(dashboardId);
-                console.log(projectId);
-                console.log(dashboardName);
-
-                daliaDossierList += '<option className="dossier" value="' + projectId + '" id="' + dashboardId + '" />' + dashboardName + '</option>';
-
-            }
-
-            $("#daliaDossierList").append(daliaDossierList);
-
-            $('#daliaDossierList').trigger("chosen:updated");
-        })
-
-
-
-
-        function daliaDossier(selecteddossier) {
-
-            var projid = selecteddossier[selecteddossier.selectedIndex].value;
-            var dossierid = selecteddossier[selecteddossier.selectedIndex].id
-            console.log(projid);
-            console.log(dossierid);
-            sessionStorage.setItem('projid', projid);
-            sessionStorage.setItem('dossierid', dossierid);
-            dosparam();
-        }
-    </script>
-
     <script src="./chosen.jquery.min.js"></script>
     <script src="./index.js"></script>
-    <script src="./js/API.js"></script>
     <script src="./navbaricon.js"></script>
 
 </body>
