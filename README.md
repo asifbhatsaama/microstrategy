@@ -67,11 +67,4 @@ The following REST APIs are used in this project. For more information about Mic
     ```http
     GET /api/searches/results
     ```
-   #### Query parameters
-           
-     * **type:** It is the type of objects to be searched, for example, 3 for report. Possible values are defined in [EnumDSSObjectType](https://lw.microstrategy.com/msdz/msdl/GARelease_Current/docs/ReferenceFiles/reference/com/microstrategy/webapi/EnumDSSXMLObjectTypes.html)
-           
-     * **offset:** It is the start point of your response. For example, if offset=2, it will return the report data beginning with the second record. The default value is 0.
-   
-     * **limit:** It is the max number of records to be returned. For example, if the limit is 500, it will return only 500 records of the report. The default value is 1000.
            
